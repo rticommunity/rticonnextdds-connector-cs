@@ -1,8 +1,5 @@
-rticonnextdds-connector
-=======================
-
 RTI Connector for Connext DDS
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+=============================
 
 RTI Connector for Connext DDS is a quick and easy way to access the
 power and functionality of `RTI Connext
@@ -34,6 +31,9 @@ Language Support
    `ctypes <https://docs.python.org/2/library/ctypes.html>`__ to call
    our native functions; of course everything is hidden in a nice Python
    wrapper.
+-  **C#/.NET languages**: we use P/Invoke technology to call the native functions.
+   It works with .NET Standard 1.1, .NET Framework 3.5, .NET Core .1.0 and Mono.
+   It's compatible with Windows, Linux and Mac OS X.
 -  **lua**: we have been supporting Lua in our `RTI
    Prototyper <https://community.rti.com/downloads/experimental/rti-prototyper-with-lua>`__
    for a while now. Check more information on our
@@ -84,7 +84,7 @@ What is this git repository
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 It is our way to make the connector technology available to you! As of
-today we included Node.js, Python and Lua (through RTI Prototyper) for
+today we included Node.js, Python, C# and Lua (through RTI Prototyper) for
 few architectures.
 
 Also, for Node.js users, we will use this repo for the npm registry.
@@ -105,7 +105,7 @@ at the examples you'll see that is very easy to use our connector.
 
 For an overview of the API in JavaScript check this
 `page <examples/nodejs/README.md>`__. For the Python version visit this
-`one <examples/python/README.md>`__.
+`one <examples/python/README.md>`__.  For the C# version visit this `one <examples/csharp/README.md>`__.
 
 We have documentation on how to access the data sample fields in Section
 6.4 'Data Access API' of the `RTI Prototyper Getting Started
@@ -150,3 +150,27 @@ any warranty for fitness for any purpose. RTI is under no obligation to
 maintain or support the Software. RTI shall not be liable for any
 incidental or consequential damages arising out of the use or inability
 to use the software.
+
+The following non-RTI software is included in this distribution under the corresponding license: 
+
+    Newtonsoft.Json https://www.newtonsoft.com/json
+
+    Copyright (c) 2007 James Newton-King
+
+    Permission is hereby granted, free of charge, to any person obtaining a copy
+    of this software and associated documentation files (the "Software"), to
+    deal in the Software without restriction, including without limitation the
+    rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+    sell copies of the Software, and to permit persons to whom the Software is
+    furnished to do so, subject to the following conditions:
+
+    The above copyright notice and this permission notice shall be included in
+    all copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+    FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+    IN THE SOFTWARE.

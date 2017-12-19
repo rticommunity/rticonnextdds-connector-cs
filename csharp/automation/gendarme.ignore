@@ -1,0 +1,19 @@
+R: Gendarme.Rules.Naming.AvoidNonAlphanumericIdentifierRule
+# The assembly needs an underscore to have a difference name with the C library
+A: librtiddsconnector_dotnet
+
+R: Gendarme.Rules.Maintainability.VariableNamesShouldNotMatchFieldNamesRule
+# I allow this to happen only for constructors
+A: librtiddsconnector_dotnet
+
+R: Gendarme.Rules.Naming.UseCorrectCasingRule
+# We should use RTI instead of Rti for consistency with other RTI C# APIs.
+A: librtiddsconnector_dotnet
+
+R: Gendarme.Rules.Correctness.DisposableFieldsShouldBeDisposedRule
+# SampleCollection doesn't own Reader object so it shouldn't dispose it.
+T: RTI.Connext.Connector.SampleCollection/SampleEnumerator
+
+R: Gendarme.Rules.Maintainability.AvoidLackOfCohesionOfMethodsRule
+# It implements many GetValueType methods for convenience
+T: RTI.Connext.Connector.Sample

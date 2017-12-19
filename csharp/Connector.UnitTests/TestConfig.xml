@@ -1,0 +1,122 @@
+﻿<?xml version="1.0"?>
+<!--
+    (c) 2005-2017 Copyright, Real-Time Innovations, All rights reserved.
+
+    RTI grants Licensee a license to use, modify, compile, and create
+    derivative works of the Software.  Licensee has the right to distribute
+    object form only for use with RTI products. The Software is provided
+    "as is", with no warranty of any type, including any warranty for fitness
+    for any purpose. RTI is under no obligation to maintain or support the
+    Software.  RTI shall not be liable for any incidental or consequential
+    damages arising out of the use or inability to use the software.
+ -->
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="http://community.rti.com/schema/5.3.0/rti_dds_profiles.xsd"
+        version="5.3.0">
+
+    <qos_library name="QosLibrary">
+        <qos_profile name="DefaultProfile"
+                base_name="BuiltinQosLibExp::Generic.StrictReliable"
+                is_default_qos="true"/>
+    </qos_library>
+
+    <!-- types -->
+    <types>
+        <struct name="ShapeType" extensibility="extensible">
+            <member name="color" stringMaxLength="128" id="0" type="string" key="true"/>
+            <member name="x" id="1" type="int32"/>
+            <member name="y" id="2" type="int32"/>
+            <member name="shapesize" id="3" type="int32"/>
+        </struct>
+        <enum name="ShapeFillKind" extensibility="extensible">
+            <enumerator name="SOLID_FILL" value="0"/>
+            <enumerator name="TRANSPARENT_FILL" value="1"/>
+            <enumerator name="HORIZONTAL_HATCH_FILL" value="2"/>
+            <enumerator name="VERTICAL_HATCH_FILL" value="3"/>
+        </enum>
+        <struct name="Inner">
+            <member name="z" type="int32" />
+        </struct>
+        <struct name="ShapeTypeExtended" baseType="ShapeType" extensibility="extensible">
+            <member name="fillKind" id="4" type="nonBasic" nonBasicTypeName="ShapeFillKind"/>
+            <member name="angle" id="5" type="float32"/>
+            <member name="hidden" id="6" type="boolean"/>
+            <member name="list" id="7" type="int32" arrayDimensions="5" />
+            <member name="inner" id="8" type="nonBasic" nonBasicTypeName="Inner" />
+            <member name="byte" id="9" type="byte" />
+            <member name="ushort" id="10" type="uint16" />
+            <member name="short" id="11" type="int16" />
+            <member name="uint" id="12" type="uint32" />
+            <member name="ulong" id="13" type="uint64" />
+            <member name="long" id="14" type="int64" />
+            <member name="double" id="15" type="float64" />
+        </struct>
+    </types>
+
+    <!-- Domain Library -->
+    <domain_library name="DomainLib">
+        <domain name="Domain" domain_id="0">
+            <register_type name="ShapeTypeExtended" type_ref="ShapeTypeExtended" />
+            <topic name="Square" register_type_ref="ShapeTypeExtended"/>
+        </domain>
+    </domain_library>
+
+    <!-- Participant library -->
+    <domain_participant_library name="PartLib">
+
+        <domain_participant name="PartPub" domain_ref="DomainLib::Domain">
+            <!-- Reduces the participant shutdown time -->
+            <participant_qos base_name="BuiltinQosLibExp::Generic.StrictReliable">
+                <database>
+                    <shutdown_cleanup_period>
+                        <sec>0</sec>
+                        <nanosec>0</nanosec>
+                    </shutdown_cleanup_period>
+                </database>
+            </participant_qos>
+            <publisher name="MyPublisher">
+                <data_writer name="MySquareWriter" topic_ref="Square">
+                    <datawriter_qos base_name="BuiltinQosLibExp::Generic.StrictReliable" />
+                </data_writer>
+            </publisher>
+        </domain_participant>
+
+        <domain_participant name="PartSub" domain_ref="DomainLib::Domain">
+            <!-- Reduces the participant shutdown time -->
+            <participant_qos base_name="BuiltinQosLibExp::Generic.StrictReliable">
+                <database>
+                    <shutdown_cleanup_period>
+                        <sec>0</sec>
+                        <nanosec>0</nanosec>
+                    </shutdown_cleanup_period>
+                </database>
+            </participant_qos>
+            <subscriber name="MySubscriber">
+                <data_reader name="MySquareReader" topic_ref="Square" >
+                    <datareader_qos base_name="BuiltinQosLibExp::Generic.StrictReliable" />
+                </data_reader>
+            </subscriber>
+        </domain_participant>
+
+        <domain_participant name="PartPubSub" domain_ref="DomainLib::Domain">
+            <!-- Reduces the participant shutdown time -->
+            <participant_qos base_name="BuiltinQosLibExp::Generic.StrictReliable">
+                <database>
+                    <shutdown_cleanup_period>
+                        <sec>0</sec>
+                        <nanosec>0</nanosec>
+                    </shutdown_cleanup_period>
+                </database>
+            </participant_qos>
+            <publisher name="MyPublisher">
+                <data_writer name="MySquareWriter" topic_ref="Square">
+                    <datawriter_qos base_name="BuiltinQosLibExp::Generic.StrictReliable" />
+                </data_writer>            </publisher>
+            <subscriber name="MySubscriber">
+                <data_reader name="MySquareReader" topic_ref="Square" >
+                    <datareader_qos base_name="BuiltinQosLibExp::Generic.StrictReliable" />
+                </data_reader>
+            </subscriber>
+        </domain_participant>
+    </domain_participant_library>
+</dds>
