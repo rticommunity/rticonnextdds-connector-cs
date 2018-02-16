@@ -13,6 +13,7 @@ namespace RTI.Connext.Connector.UnitTests
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Runtime.InteropServices;
     using System.Threading;
     using NUnit.Framework;
 
@@ -178,8 +179,17 @@ namespace RTI.Connext.Connector.UnitTests
             SendAndTakeOrReadStandardSample(true);
             Sample sample = samples.Single();
             Assert.DoesNotThrow(() => sample.Data.GetInt32Value("fakeInt"));
-            Assert.DoesNotThrow(() => sample.Data.GetStringValue("fakeString"));
             Assert.DoesNotThrow(() => sample.Data.GetBoolValue("fakeBool"));
+        }
+
+        [Test]
+        public void GetNonExistingStringFieldThrowsException()
+        {
+            SendAndTakeOrReadStandardSample(true);
+            Sample sample = samples.Single();
+            Assert.Throws<SEHException>(
+                () => sample.Data.GetStringValue("fakeString"),
+                "Error getting the string");
         }
 
         [Test]
@@ -192,12 +202,14 @@ namespace RTI.Connext.Connector.UnitTests
         }
 
         [Test]
-        public void GetWrongVariableTypeForStringsDoesNotThrowException()
+        public void GetWrongVariableTypeForStringsMayThrowException()
         {
             SendAndTakeOrReadStandardSample(true);
             Sample sample = samples.Single();
             Assert.DoesNotThrow(() => sample.Data.GetStringValue("x"));
-            Assert.DoesNotThrow(() => sample.Data.GetStringValue("hidden"));
+            Assert.Throws<SEHException>(
+                () => sample.Data.GetStringValue("hidden"),
+                "Error getting the string");
             Assert.DoesNotThrow(() => sample.Data.GetStringValue("angle"));
             Assert.DoesNotThrow(() => sample.Data.GetStringValue("fillKind"));
         }
@@ -259,6 +271,55 @@ namespace RTI.Connext.Connector.UnitTests
             Assert.AreEqual("test", received.Color);
             Assert.AreEqual(3, received.X);
             Assert.AreEqual(true, received.Hidden);
+        }
+
+        [Test]
+        public void GetValidFullObjectSample()
+        {
+            MyFullType obj = new MyFullType {
+                Color = "test",
+                X = 3,
+                Y = 2,
+                Shapesize = 30,
+                FillKind = MyFullType.ShapeFillKind.Solid,
+                Angle = 3.14f,
+                Hidden = true,
+                List = new int[5] { 2, 3, 4, 5, 6 },
+                Inner = new MyFullType.InnerStruct { Z = 23 },
+                Byte = 0x7F,
+                Ushort = 0xEFFE,
+                Short = -324,
+                Uint = 0xCAFEBABE,
+                Ulong = 0xBEEFBEEFBEEFBEEF,
+                Long = -1532543000,
+                Double = 5.2342
+            };
+
+            SendAndTakeObjectSample(obj);
+            Sample sample = samples.Single();
+            MyFullType received = sample.Data.GetSampleAs<MyFullType>();
+
+            Assert.AreEqual("test", received.Color);
+            Assert.AreEqual(3, received.X);
+            Assert.AreEqual(2, received.Y);
+            Assert.AreEqual(30, received.Shapesize);
+            Assert.AreEqual(MyFullType.ShapeFillKind.Solid, received.FillKind);
+            Assert.AreEqual(3.14f, received.Angle);
+            Assert.AreEqual(true, received.Hidden);
+            Assert.AreEqual(5, received.List.Length);
+            Assert.AreEqual(2, received.List[0]);
+            Assert.AreEqual(3, received.List[1]);
+            Assert.AreEqual(4, received.List[2]);
+            Assert.AreEqual(5, received.List[3]);
+            Assert.AreEqual(6, received.List[4]);
+            Assert.AreEqual(23, received.Inner.Z);
+            Assert.AreEqual(0x7F, received.Byte);
+            Assert.AreEqual(0xEFFE, received.Ushort);
+            Assert.AreEqual(-324, received.Short);
+            Assert.AreEqual(0xCAFEBABE, received.Uint);
+            Assert.AreEqual(0xBEEFBEEFBEEFBEEF, received.Ulong);
+            Assert.AreEqual(-1532543000, received.Long);
+            Assert.AreEqual(5.2342, received.Double);
         }
 
         [Test]

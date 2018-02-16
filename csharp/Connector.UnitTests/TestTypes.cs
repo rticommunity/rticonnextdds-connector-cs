@@ -13,6 +13,60 @@ namespace RTI.Connext.Connector.UnitTests
     using Newtonsoft.Json.Serialization;
 
     [JsonObject(NamingStrategyType = typeof(CamelCaseNamingStrategy))]
+    class MyFullType
+    {
+        public string Color { get; set; }
+
+        public int X { get; set; }
+
+        public int Y { get; set; }
+
+        public int Shapesize { get; set; }
+
+        public ShapeFillKind FillKind { get; set; }
+
+        public float Angle { get; set; }
+
+        public bool Hidden { get; set; }
+
+        public int[] List { get; set; }
+
+        public static int ListLength { get { return 5; } }
+
+        public InnerStruct Inner { get; set; }
+
+        public byte Byte { get; set; }
+
+        public ushort Ushort { get; set; }
+
+        public short Short { get; set; }
+
+        public uint Uint { get; set; }
+
+        public ulong Ulong { get; set; }
+
+        public long Long { get; set; }
+
+        public double Double { get; set; }
+
+        [JsonObject(NamingStrategyType = typeof(CamelCaseNamingStrategy))]
+        public struct InnerStruct
+        {
+            public int Z {
+                get;
+                set;
+            }
+        }
+
+        public enum ShapeFillKind {
+            Solid,
+            Transparent,
+            HorizontalHatch,
+            VerticalHatch
+        }
+    }
+
+    [JsonObject(NamingStrategyType = typeof(CamelCaseNamingStrategy))]
     struct MyStructType
     {
         public string Color { get; set; }

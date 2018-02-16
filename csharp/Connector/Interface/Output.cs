@@ -54,7 +54,7 @@ namespace RTI.Connext.Connector.Interface
                 throw new ObjectDisposedException(nameof(Connector));
             }
 
-            NativeMethods.RTIDDSConnector_write(Connector.Handle, EntityName);
+            NativeMethods.RTIDDSConnector_write(Connector.Handle, EntityName, null);
         }
 
         static class NativeMethods
@@ -72,7 +72,8 @@ namespace RTI.Connext.Connector.Interface
             [DllImport("rtiddsconnector", CharSet = CharSet.Ansi)]
             public static extern void RTIDDSConnector_write(
                 Connector.ConnectorPtr connectorHandle,
-                string entityName);
+                string entityName,
+                string paramsJson);
         }
     }
 }

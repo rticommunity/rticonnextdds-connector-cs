@@ -55,11 +55,12 @@ namespace RTI.Connext.Connector.Interface
                 throw new ObjectDisposedException(nameof(Connector));
             }
 
-            return NativeMethods.RTIDDSConnector_getStringFromSamples(
-                input.Connector.Handle,
-                input.EntityName,
-                index,
-                field);
+            return GetStringAndFreeUnmanaged(
+                NativeMethods.RTIDDSConnector_getStringFromSamples(
+                    input.Connector.Handle,
+                    input.EntityName,
+                    index,
+                    field));
         }
 
         public string GetJsonFromSample()
@@ -68,10 +69,11 @@ namespace RTI.Connext.Connector.Interface
                 throw new ObjectDisposedException(nameof(Connector));
             }
 
-            return NativeMethods.RTIDDSConnector_getJSONSample(
-                input.Connector.Handle,
-                input.EntityName,
-                index);
+            return GetStringAndFreeUnmanaged(
+                NativeMethods.RTIDDSConnector_getJSONSample(
+                    input.Connector.Handle,
+                    input.EntityName,
+                    index));
         }
 
         public bool GetBoolFromInfo(string field)
@@ -85,6 +87,19 @@ namespace RTI.Connext.Connector.Interface
                 input.EntityName,
                 index,
                 field) != 0;
+        }
+
+        string GetStringAndFreeUnmanaged(IntPtr strPtr)
+        {
+            if (strPtr == IntPtr.Zero) {
+                throw new SEHException("Error getting the string");
+            }
+
+            // Since the C library owns the memory, we convert into string
+            // and let the C library free the memory
+            string str = Marshal.PtrToStringAnsi(strPtr);
+            NativeMethods.RTIDDSConnector_freeString(strPtr);
+            return str;
         }
 
         static class NativeMethods
@@ -111,17 +126,20 @@ namespace RTI.Connext.Connector.Interface
                 string name);
 
             [DllImport("rtiddsconnector", CharSet = CharSet.Ansi)]
-            public static extern string RTIDDSConnector_getStringFromSamples(
+            public static extern IntPtr RTIDDSConnector_getStringFromSamples(
                 Connector.ConnectorPtr connectorHandle,
                 string entityName,
                 int index,
                 string name);
 
             [DllImport("rtiddsconnector", CharSet = CharSet.Ansi)]
-            public static extern string RTIDDSConnector_getJSONSample(
+            public static extern IntPtr RTIDDSConnector_getJSONSample(
                 Connector.ConnectorPtr connectorHandle,
                 string entityName,
                 int index);
+
+            [DllImport("rtiddsconnector")]
+            public static extern void RTIDDSConnector_freeString(IntPtr strPtr);
         }
     }
 }

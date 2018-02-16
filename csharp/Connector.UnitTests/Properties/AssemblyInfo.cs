@@ -19,6 +19,6 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCopyright("(c) Copyright, Real-Time Innovations, 2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
-[assembly: AssemblyVersion("0.3.1")]
+[assembly: AssemblyVersion("0.3.2")]
 [assembly: CLSCompliant(true)]
 [assembly: ComVisible(true)]
