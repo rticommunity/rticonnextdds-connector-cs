@@ -7,6 +7,7 @@
 ******************************************************************************/
 
 var os = require('os');
+var ref = require('ref');
 var ffi = require("ffi");
 var util = require('util');
 EventEmitter = require('events').EventEmitter
@@ -53,6 +54,7 @@ var rtin = ffi.Library(LIB_FULL_PATH, {
 "RTIDDSConnector_getSamplesLength": [ "double", ["pointer", "string"]],
 "RTIDDSConnector_getInfosLength": [ "double", ["pointer", "string"]],
 "RTIDDSConnector_clear": ["void", ["pointer", "string"]],
+"RTIDDSConnector_freeString": [ "void", ["char *"]],
 "RTIDDSConnector_setNumberIntoSamples": [ "void", ["pointer", "string", "string", "double"]],
 "RTIDDSConnector_getNumberFromSamples": [ "double", ["pointer", "string", "int", "string"]],
 "RTIDDSConnector_getNumberFromInfos": [ "double", ["pointer", "string", "int", "string"]],
@@ -62,11 +64,11 @@ var rtin = ffi.Library(LIB_FULL_PATH, {
 "RTIDDSConnector_setStringIntoSamples": [ "void", ["pointer", "string", "string", "string"]],
 "RTIDDSConnector_getStringFromSamples": [ "string", ["pointer", "string", "int", "string"]],
 "RTIDDSConnector_getStringFromInfos": [ "string", ["pointer", "string", "int", "string"]],
-"RTIDDSConnector_write": [ "void", ["pointer", "string"]],
+"RTIDDSConnector_write": [ "void", ["pointer", "string", "string"]],
 "RTIDDSConnector_read": [ "void", ["pointer", "string"]],
 "RTIDDSConnector_take": [ "void", ["pointer", "string"]],
 "RTIDDSConnector_wait": [ "int", ["pointer", "int"]],
-"RTIDDSConnector_getJSONSample": [ "string", ["pointer", "string", "int"]],
+"RTIDDSConnector_getJSONSample": [ "char *", ["pointer", "string", "int"]],
 "RTIDDSConnector_setJSONInstance": [ "void", ["pointer", "string", "string"]],
 "RTIDDSConnector_delete": [ "void", ["pointer"]],
 "RTIDDSConnector_getWriter": [ "pointer", ["pointer","string"]],
@@ -89,16 +91,28 @@ function Samples(input) {
   }
 
   this.getString = function(index, fieldName) {
-    return rtin.RTIDDSConnector_getStringFromSamples(input.connector.native,input.name,index,fieldName);
+    var myStr =  rtin.RTIDDSConnector_getStringFromSamples(input.connector.native,input.name,index,fieldName);
+    if (!myStr) {
+        throw "Error getting the string";
+    }
+    var toRet = myStr;
+    rtin.RTIDDSConnector_freeString(myStr);
+    return toRet;
   }
 
   this.getJSON = function(index) {
+    var jsonStr = rtin.RTIDDSConnector_getJSONSample(input.connector.native, input.name, index);
+    if (!jsonStr) {
+        throw "Error getting the json string";
+    }
     var jsonObj;
     try {
-      jsonObj = JSON.parse(rtin.RTIDDSConnector_getJSONSample(input.connector.native, input.name, index));
+      jsonObj = JSON.parse(jsonStr.readCString());
     } catch (err) {
+      rtin.RTIDDSConnector_freeString(jsonStr);
       throw err;
     }
+    rtin.RTIDDSConnector_freeString(jsonStr);
     return jsonObj;
   }
 
@@ -175,7 +189,7 @@ function Output(connector,name) {
   this.instance = new Instance(this)
 
   this.write = function() {
-    return rtin.RTIDDSConnector_write(this.connector.native,name);
+    return rtin.RTIDDSConnector_write(this.connector.native,name, null);
   }
 
   this.clear_members = function() {
@@ -191,7 +205,10 @@ function Connector(configName,fileName) {
   var on_data_available_run = false;
 
   this.delete = function() {
-    return rtin.RTIDDSConnector_delete(this.native);
+    var rc = rtin.RTIDDSConnector_delete(this.native);
+    this.native = null;
+    return rc;
+
   }
 
   this.getInput = function(inputName) {
@@ -203,16 +220,22 @@ function Connector(configName,fileName) {
   }
 
   var onDataAvailable = function(connector) {
-      var rc = rtin.RTIDDSConnector_wait.async(
-          connector.native, -1,
-          function(err, res) {
-            if (err) throw err;
-            if (on_data_available_run == true) {
-              onDataAvailable(connector);
-            }
-            connector.emit("on_data_available");
-          }
-      );
+      //console.log(connector)
+      if (connector && connector.native != null) {
+          var rc = rtin.RTIDDSConnector_wait.async(
+              connector.native, 1000,
+              function(err, res) {
+                //console.log("wait func called with err " + err + " and res " + res);
+                if (err) throw err;
+                if (on_data_available_run == true) {
+                  onDataAvailable(connector);
+                }
+                if (res != 10/*TIMEOUT*/) {
+                    connector.emit("on_data_available");
+                }
+              }
+          );
+      }
   }
 
   var newListenerCallBack = function(eventName, fnListener) {
