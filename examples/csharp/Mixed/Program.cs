@@ -75,16 +75,16 @@ namespace Mixed
         static void Subscribe(Connector connector, int count)
         {
             string inputName = "MySubscriber::MySquareReader";
-            Input inpout = connector.GetInput(inputName);
+            Input input = connector.GetInput(inputName);
 
             for (int i = 0; i < count || count == 0; i++) {
                 // Poll for samples every 2 seconds
                 Console.WriteLine("Waiting 2 seconds...");
                 Thread.Sleep(2000);
 
-                inpout.Take();
-                Console.WriteLine("Received {0} samples", inpout.Samples.Count);
-                foreach (Sample sample in inpout.Samples) {
+                input.Take();
+                Console.WriteLine("Received {0} samples", input.Samples.Count);
+                foreach (Sample sample in input.Samples) {
                     if (sample.Info.IsValid) {
                         // Gets an integer using generic types
                         int x = sample.Data.GetInt32Value("x");

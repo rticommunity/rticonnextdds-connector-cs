@@ -9,8 +9,6 @@
 // damages arising out of the use or inability to use the software.
 namespace RTI.Connext.Connector
 {
-    using System;
-
     /// <summary>
     /// Connector input.
     /// </summary>

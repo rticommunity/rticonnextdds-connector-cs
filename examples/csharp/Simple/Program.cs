@@ -51,7 +51,6 @@ namespace Simple
                 output.ClearValues();
                 instance.SetValue("x", i);
                 instance.SetValue("y", i * 2);
-                instance.SetValue("y", 3.14);
                 instance.SetValue("shapesize", 30);
                 instance.SetValue("color", "BLUE");
 

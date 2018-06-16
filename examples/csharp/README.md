@@ -21,7 +21,7 @@ the XML format check the [XML App Creation guide](https://community.rti.com/stat
 have a look to the [ShapeExample.xml](ShapeExample.xml) file included in this directory.
 
 ```csharp
-Connector = connector = new Connector("MyParticipantLibrary::Zero", "ShapeExample.xml");
+Connector connector = new Connector("MyParticipantLibrary::Zero", "ShapeExample.xml");
 ```
 
 #### Delete a Connector
@@ -103,7 +103,7 @@ foreach (Sample sample in input.Samples) {
         string color = sample.Data.GetValueString("color");
 
         // Or by using the Get<T> method
-        int y = sample.DataGetInt32("y");
+        int y = sample.Data.GetInt32("y");
     } else {
         // This is a metadata sample.
         Console.WriteLine("Received metadata");

@@ -10,7 +10,6 @@
 namespace RTI.Connext.Connector.UnitTests
 {
     using System;
-    using System.Runtime.InteropServices;
     using NUnit.Framework;
 
     [TestFixture]
