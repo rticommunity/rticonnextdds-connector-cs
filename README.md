@@ -23,8 +23,15 @@ It's compatible with Windows, Linux, Mac OS X and Android.
 
 ### Native libraries
 
-We are building our library for few architectures only.
-Check them out [here](https://github.com/rticommunity/rticonnextdds-connector/tree/master/lib).
+The *Connector* C# API use native libraries from the main
+[Connector](https://github.com/rticommunity/rticonnextdds-connector) repository. It can be found in the _native-libs_ directory.
+Make sure to clone this repository with the `--recursive` argument or run:
+
+```bash
+git submodule update --init --recurse
+```
+
+The native libraries have been built for few architectures only.
 If you need another architecture, please contact your RTI account manager or sales@rti.com.
 
 If you want to check the version of the libraries, run the following command:
@@ -35,7 +42,8 @@ strings librtiddsconnector.dll | grep BUILD
 
 ### Threading model
 
-The *Connector* Native API do not yet implement any mechanism for thread safety.
+The *Connector* Native and C# APIs do not yet implement any mechanism
+for thread safety.
 
 ## Documentation
 
