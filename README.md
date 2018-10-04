@@ -89,8 +89,6 @@ With the sole exception of the contents of the "examples" subdirectory, all use 
 
 This software is an experimental ("pre-production") product. The Software is provided "as is," with no warranty of any type, including any warranty for fitness for any purpose. RTI is under no obligation to maintain or support the software. RTI shall not be liable for any incidental or consequential damages arising out of the use or inability to use the software.
 
-This software is an experimental (aka "pre-production") product. The Software is provided "as is", with no warranty of any type, including any warranty for fitness for any purpose. RTI is under no obligation to maintain or support the Software. RTI shall not be liable for any incidental or consequential damages arising out of the use or inability to use the software.
-
 The following non-RTI software is included in this distribution under the corresponding license:
 
     Newtonsoft.Json https://www.newtonsoft.com/json
