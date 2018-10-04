@@ -12,13 +12,16 @@ It can be used to quickly create tests for your distributed system and, thanks
 to the binding with scripting languages and the use of XML, to easily integrate
 with tons of other available technologies.
 
-The *Connector* library is provided in binary form for selected architectures. Scripting language bindings and examples are provided in source format.
+The *Connector* library is provided in binary form for selected architectures.
+Scripting language bindings and examples are provided in source format.
 
-## C# / .NET Support
+## Compatibility
 
-We use P/Invoke technology to call the native functions. This API works with .NET Standard 1.1, .NET Framework 3.5, .NET Core .1.0, .NET Core 2.1 and Mono. It's compatible with Windows, Linux, Mac OS X and Android.
+We use P/Invoke technology to call the native functions. This API works with
+.NET Standard 1.1, .NET Framework 3.5, .NET Core .1.0, .NET Core 2.1 and Mono.
+It's compatible with Windows, Linux, Mac OS X and Android.
 
-## Platform support
+### Native libraries
 
 We are building our library for few architectures only.
 Check them out [here](https://github.com/rticommunity/rticonnextdds-connector/tree/master/lib).
@@ -33,13 +36,6 @@ strings librtiddsconnector.dll | grep BUILD
 ### Threading model
 
 The *Connector* Native API do not yet implement any mechanism for thread safety.
-
-## Support
-
-This is an experimental RTI product. As such we do offer support through the
-[RTI Community Forum](https://community.rti.com/forums/technical-questions).
-We also welcome issues and pull request in this GitHub repository.
-We'd love your feedback.
 
 ## Documentation
 
@@ -71,6 +67,13 @@ msbuild
 ```
 
 * From Visual Studio or Monodevelop open *Connector-VS.sln*.
+
+## Support
+
+This is an experimental RTI product. As such we do offer support through the
+[RTI Community Forum](https://community.rti.com/forums/technical-questions).
+We also welcome issues and pull request in this GitHub repository.
+We'd love your feedback.
 
 ## License
 
