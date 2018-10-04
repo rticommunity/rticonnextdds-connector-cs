@@ -1,12 +1,18 @@
-# CSharp
+# Output
 obj/
 bin/
 
+# IDE
 *.csproj.user
 !examples/*/*.csproj.user
 *.userprefs
+.vs/
 
-testrunner
+# NuGet
+testrunner/
+packages/
+
+# Linters and test runners
 StyleCopViolations.xml
 TestResult.xml
 gendarme_report.html
