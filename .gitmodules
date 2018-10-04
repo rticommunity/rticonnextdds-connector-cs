@@ -1,0 +1,3 @@
+[submodule "native-libs"]
+	path = native-libs
+	url = https://github.com/rticommunity/rticonnextdds-connector
