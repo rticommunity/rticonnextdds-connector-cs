@@ -1,0 +1,251 @@
+{
+  "homepages": [],
+  "source_base_path": "/home/benito/Engineering/connector/docs",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "Conceptual",
+      "source_relative_path": "../README.md",
+      "output": {
+        ".html": {
+          "relative_path": "README.html",
+          "hash": "3d/FcO8+p1qQcgHFK8bLjg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RTI.Connext.Connector.Connector.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RTI.Connext.Connector.Connector.html",
+          "hash": "OjfFWgYmx1g9zgvbsB5hIg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RTI.Connext.Connector.Input.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RTI.Connext.Connector.Input.html",
+          "hash": "dxcTgl3INrDxr2kUBoUVdw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RTI.Connext.Connector.Instance.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RTI.Connext.Connector.Instance.html",
+          "hash": "lLFn1Zuk1CWnfmHGOmWMIw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RTI.Connext.Connector.Output.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RTI.Connext.Connector.Output.html",
+          "hash": "o2OhFunPLSanABU0Ba5Wfw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RTI.Connext.Connector.Sample.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RTI.Connext.Connector.Sample.html",
+          "hash": "ExgoNrQXVccziDy6w/3xMQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RTI.Connext.Connector.SampleCollection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RTI.Connext.Connector.SampleCollection.html",
+          "hash": "8e/DEPP8x2tNVub58ZeJZg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RTI.Connext.Connector.SampleData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RTI.Connext.Connector.SampleData.html",
+          "hash": "d2lLD6JeseKtehv5GRPLbQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RTI.Connext.Connector.SampleInfo.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RTI.Connext.Connector.SampleInfo.html",
+          "hash": "poNQ/B9Nu9ZbBsuNSU0ejA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RTI.Connext.Connector.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RTI.Connext.Connector.html",
+          "hash": "QZo6H7sCxSn1ShAuBfx9Eg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "articles/Configuration.xml",
+      "output": {
+        "resource": {
+          "relative_path": "articles/Configuration.xml"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/api_overview.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/api_overview.html",
+          "hash": "cMTOmaN1b+3YW8sSy5JxMw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "fusion/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "fusion/toc.html",
+          "hash": "uZ5jlKlCOc+6MqpEdMcgMQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/favicon.ico",
+      "output": {
+        "resource": {
+          "relative_path": "images/favicon.ico"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/rti_logo.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/rti_logo.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html",
+          "hash": "2uWsYbXrByaw42tOeO40DA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "toc.html",
+          "hash": "9/7/waG6ZYqp62Mb/LLHhQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    }
+  ],
+  "incremental_info": [
+    {
+      "status": {
+        "can_incremental": false,
+        "details": "Cannot build incrementally because config changed.",
+        "incrementalPhase": "build"
+      },
+      "processors": {
+        "TocDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build"
+        },
+        "ConceptualDocumentProcessor": {
+          "can_incremental": false,
+          "incrementalPhase": "build"
+        },
+        "ManagedReferenceDocumentProcessor": {
+          "can_incremental": false,
+          "incrementalPhase": "build"
+        },
+        "ResourceDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor ResourceDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build"
+        }
+      }
+    },
+    {
+      "status": {
+        "can_incremental": true,
+        "details": "Can support incremental post processing.",
+        "incrementalPhase": "postProcessing"
+      },
+      "processors": {}
+    }
+  ],
+  "version_info": {},
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}

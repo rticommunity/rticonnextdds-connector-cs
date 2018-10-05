@@ -1,0 +1,205 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>RTI Connector C# / .NET for Connext DDS | RTI Connector C# </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="RTI Connector C# / .NET for Connext DDS | RTI Connector C# ">
+    <meta name="generator" content="docfx 2.39.2.0">
+    
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="stylesheet" href="styles/docfx.vendor.css">
+    <link rel="stylesheet" href="styles/docfx.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <meta property="docfx:navrel" content="toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    <meta property="docfx:newtab" content="true">
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="index.html">
+                <img id="logo" class="svg" src="images/rti_logo.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        <div class="article row grid">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="rti-connector-c--net-for-connext-dds">RTI Connector C# / .NET for Connext DDS</h1>
+
+<p><em>RTI Connector</em> for Connext DDS is a quick and easy way to access the power and
+functionality of <a href="http://www.rti.com/products/index.html">RTI Connext DDS</a>.
+It is based on <a href="https://community.rti.com/static/documentation/connext-dds/5.3.1/doc/manuals/connext_dds/xml_application_creation/RTI_ConnextDDS_CoreLibraries_XML_AppCreation_GettingStarted.pdf">XML App Creation</a>
+and Dynamic Data.</p>
+<p><em>Connector</em> was created by the RTI Research Group to quickly and easily develop
+demos and proof of concept. We think that it can be useful for anybody who needs
+a quick way to script tests and interact with DDS using different scripting
+languages.</p>
+<p>It can be used to quickly create tests for your distributed system and, thanks
+to the binding with scripting languages and the use of XML, to easily integrate
+with tons of other available technologies.</p>
+<p>The <em>Connector</em> library is provided in binary form for selected architectures.
+Scripting language bindings and examples are provided in source format.</p>
+<h2 id="compatibility">Compatibility</h2>
+<p>We use P/Invoke technology to call the native functions. This API works with
+.NET Standard 1.1, .NET Framework 3.5, .NET Core .1.0, .NET Core 2.1 and Mono.
+It's compatible with Windows, Linux, Mac OS X and Android.</p>
+<h3 id="native-libraries">Native libraries</h3>
+<p>The <em>Connector</em> C# API use native libraries from the main
+<a href="https://github.com/rticommunity/rticonnextdds-connector">Connector</a> repository.
+It can be found in the <em>rticonnextdds-connector</em> directory.
+Make sure to clone this repository with the <code>--recursive</code> argument or run:</p>
+<pre><code class="lang-bash">git submodule update --init --recurse
+</code></pre>
+<p>The native libraries have been built for few architectures only.
+If you need another architecture, please contact your RTI account manager or
+sales@rti.com.</p>
+<p>If you want to check the version of the libraries, run the following command:</p>
+<pre><code class="lang-bash">strings librtiddsconnector.dll | grep BUILD
+</code></pre>
+<h3 id="threading-model">Threading model</h3>
+<p>The <em>Connector</em> Native and C# APIs do not yet implement any mechanism
+for thread safety.</p>
+<h2 id="documentation">Documentation</h2>
+<p>The .NET API is self-documented. You can generate the documentation with
+<a href="https://dotnet.github.io/docfx">docfx</a> running:</p>
+<pre><code class="lang-bash">docfx docs/docfx.json --serve
+</code></pre>
+<p>The documentation includes an <a class="xref" href="articles/api_overview.html">overview of the API</a> and
+the description of each class.</p>
+<p>You can also check the <em>examples</em>. They cover the full API usage.</p>
+<h2 id="getting-started-with-net">Getting started with .NET</h2>
+<p>Make sure you have installed <a href="http://www.mono-project.com/download/">Mono</a>,
+<a href="https://www.microsoft.com/net/core">.NET Core</a> or .NET Framework.
+Then clone the repository and compile the API:</p>
+<ul>
+<li>From terminal:</li>
+</ul>
+<pre><code class="lang-bash">git clone https://github.com/rticommunity/rticonnextdds-connector-cs --recursive
+
+# Go to the Connector directory
+cd rticonnextdds-connector-cs/src
+
+# To build with .NET Core you need this step too
+cd Connector &amp;&amp; dotnet restore &amp;&amp; cd ..
+
+# Build by default targets:
+# .NET Framework 3.5, .NET Standard 1.1, .NET Core 1.0 and .NET Core 2.1
+msbuild
+</code></pre>
+<ul>
+<li>From Visual Studio or Monodevelop open <em>src/Connector-VS.sln</em>.</li>
+</ul>
+<h2 id="support">Support</h2>
+<p>This is an experimental RTI product. As such we do offer support through the
+<a href="https://community.rti.com/forums/technical-questions">RTI Community Forum</a>.
+We also welcome issues and pull request in this GitHub repository.
+We'd love your feedback.</p>
+<h2 id="license">License</h2>
+<p>With the sole exception of the contents of the &quot;examples&quot; subdirectory,
+all use of this product is subject to the RTI Software License Agreement
+included at the top level of this repository. Files within the &quot;examples&quot;
+subdirectory are licensed as marked within the file.</p>
+<p>This software is an experimental (&quot;pre-production&quot;) product. The Software is
+provided &quot;as is,&quot; with no warranty of any type, including any warranty for
+fitness for any purpose. RTI is under no obligation to maintain or support the
+software. RTI shall not be liable for any incidental or consequential damages
+arising out of the use or inability to use the software.</p>
+<p>The following non-RTI software is included in this distribution under the
+corresponding license:</p>
+<pre><code>Newtonsoft.Json https://www.newtonsoft.com/json
+
+Copyright (c) 2007 James Newton-King
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the &quot;Software&quot;), to
+deal in the Software without restriction, including without limitation the
+rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+sell copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+IN THE SOFTWARE.
+</code></pre>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/rticommunity/rticonnextdds-connector-cs/blob/master/README.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            Copyright (c) 2018 Real-Time Innovations, Inc
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="styles/docfx.js"></script>
+    <script type="text/javascript" src="styles/main.js"></script>
+  </body>
+</html>
