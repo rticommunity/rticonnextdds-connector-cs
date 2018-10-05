@@ -24,7 +24,8 @@ It's compatible with Windows, Linux, Mac OS X and Android.
 ### Native libraries
 
 The *Connector* C# API use native libraries from the main
-[Connector](https://github.com/rticommunity/rticonnextdds-connector) repository. It can be found in the _native-libs_ directory.
+[Connector](https://github.com/rticommunity/rticonnextdds-connector) repository.
+It can be found in the _rticonnextdds-connector_ directory.
 Make sure to clone this repository with the `--recursive` argument or run:
 
 ```bash
@@ -47,7 +48,7 @@ for thread safety.
 
 ## Documentation
 
-There is an overview of the C# API in the [api-overview](api-overview.md)
+There is an overview of the C# API in the [api-overview](docs/api-overview.md)
 document.
 
 You can also check the _example_. They cover the full API usage.

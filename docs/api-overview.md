@@ -5,7 +5,7 @@
 Import the `librtiddsconnector_dotnet.dll` library to start using *Connector*. The API is under the namespace `RTI.Connext.Connector`.
 
 Make sure that the directory with the native library at
-_native-libs/lib/[arch]_ is in your `PATH` environment variable.
+_rticonnextdds-connector/lib/[arch]_ is in your `PATH` environment variable.
 
 ### Instantiate a new Connector
 

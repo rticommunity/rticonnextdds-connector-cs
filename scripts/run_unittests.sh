@@ -1,6 +1,6 @@
 #!/bin/bash
 ROOT_DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/..
-export LD_LIBRARY_PATH=${ROOT_DIR}/native-libs/lib/x64Linux2.6gcc4.4.5:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=${ROOT_DIR}/rticonnextdds-connector/lib/x64Linux2.6gcc4.4.5:$LD_LIBRARY_PATH
 
 # First for mono / .net framework
 nuget install NUnit.Runners -OutputDirectory "${ROOT_DIR}"/testrunner

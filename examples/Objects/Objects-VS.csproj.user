@@ -3,9 +3,9 @@
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'Default' ">
     <StartAction>Project</StartAction>
     <EnvironmentVariables>
-      <Variable name="LD_LIBRARY_PATH" value="../../../../native-libs/lib/x64Linux2.6gcc4.4.5/" />
-      <Variable name="DYLD_LIBRARY_PATH" value="../../../../native-libs/lib/x64Darwin16clang8.0/" />
-      <Variable name="PATH" value="..\..\..\..\native-libs\lib\x64Win64VS2013;%PATH%" />
+      <Variable name="LD_LIBRARY_PATH" value="../../../../rticonnextdds-connector/lib/x64Linux2.6gcc4.4.5/" />
+      <Variable name="DYLD_LIBRARY_PATH" value="../../../../rticonnextdds-connector/lib/x64Darwin16clang8.0/" />
+      <Variable name="PATH" value="..\..\..\..\rticonnextdds-connector\lib\x64Win64VS2013;%PATH%" />
     </EnvironmentVariables>
   </PropertyGroup>
 </Project>
