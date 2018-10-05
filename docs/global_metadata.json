@@ -1,0 +1,12 @@
+{
+    "_appTitle": "RTI Connector C#",
+    "_appFooter": "Copyright (c) 2018 Real-Time Innovations, Inc",
+    "_appLogoPath": "images/rti_logo.png",
+    "_appFaviconPath": "images/favicon.ico",
+    "_enableNewTab": true,
+    "_gitContribute": {
+        "apiSpecFolder": "docs/apidoc",
+        "repo": "https://github.com/rticommunity/rticonnextdds-connector-cs",
+        "branch": "master"
+    }
+}

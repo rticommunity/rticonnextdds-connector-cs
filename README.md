@@ -51,10 +51,17 @@ for thread safety.
 
 ## Documentation
 
-There is an overview of the C# API in the [api-overview](docs/api-overview.md)
-document.
+The .NET API is self-documented. You can generate the documentation with
+[docfx](https://dotnet.github.io/docfx) running:
 
-You can also check the _example_. They cover the full API usage.
+```bash
+docfx docs/docfx.json --serve
+```
+
+The documentation includes an [overview of the API](xref:api_overview) and
+the description of each class.
+
+You can also check the _examples_. They cover the full API usage.
 
 ## Getting started with .NET
 

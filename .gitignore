@@ -17,3 +17,8 @@ StyleCopViolations.xml
 TestResult.xml
 gendarme_report.html
 coverage-report/
+
+# Doc
+docs/api
+docs/_site
+docs/_site_pdf

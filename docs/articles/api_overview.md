@@ -1,3 +1,7 @@
+---
+uid: api_overview
+---
+
 # API Overview
 
 ## Import the RTI Connector library
@@ -10,8 +14,9 @@ _rticonnextdds-connector/lib/[arch]_ is in your `PATH` environment variable.
 ### Instantiate a new Connector
 
 To create a new *Connector* you have to pass the path to an XML file and a configuration name. For more information on
-the XML format check the [XML App Creation guide](https://community.rti.com/static/documentation/connext-dds/5.2.3/doc/manuals/connext_dds/xml_application_creation/RTI_ConnextDDS_CoreLibraries_XML_AppCreation_GettingStarted.pdf) or
-have a look to the [ShapeExample.xml](ShapeExample.xml) file included in this directory.
+the XML format check the
+[XML App Creation guide](https://community.rti.com/static/documentation/connext-dds/5.2.3/doc/manuals/connext_dds/xml_application_creation/RTI_ConnextDDS_CoreLibraries_XML_AppCreation_GettingStarted.pdf)
+and take a look into this example [Configuration.xml](Configuration.xml).
 
 ```csharp
 Connector connector = new Connector("MyParticipantLibrary::Zero", "ShapeExample.xml");
