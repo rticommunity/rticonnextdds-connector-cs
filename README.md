@@ -51,6 +51,9 @@ for thread safety.
 
 ## Documentation
 
+The online documentation is available
+[here](https://rticommunity.github.io/rticonnextdds-connector-cs).
+
 The .NET API is self-documented. You can generate the documentation with
 [docfx](https://dotnet.github.io/docfx) running:
 
