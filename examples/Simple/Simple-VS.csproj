@@ -31,7 +31,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="librtiddsconnector_dotnet">
-      <HintPath>..\..\Connector\bin\Debug\net35\librtiddsconnector_dotnet.dll</HintPath>
+      <HintPath>..\..\src\Connector\bin\Debug\net35\librtiddsconnector_dotnet.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

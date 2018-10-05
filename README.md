@@ -2,11 +2,13 @@
 
 *RTI Connector* for Connext DDS is a quick and easy way to access the power and
 functionality of [RTI Connext DDS](http://www.rti.com/products/index.html).
-It is based on [XML App Creation](https://community.rti.com/static/documentation/connext-dds/5.3.1/doc/manuals/connext_dds/xml_application_creation/RTI_ConnextDDS_CoreLibraries_XML_AppCreation_GettingStarted.pdf) and Dynamic Data.
+It is based on [XML App Creation](https://community.rti.com/static/documentation/connext-dds/5.3.1/doc/manuals/connext_dds/xml_application_creation/RTI_ConnextDDS_CoreLibraries_XML_AppCreation_GettingStarted.pdf)
+and Dynamic Data.
 
-*Connector* was created by the RTI Research Group to quickly and easily develop demos
-and proof of concept. We think that it can be useful for anybody who needs
-a quick way to script tests and interact with DDS using different scripting languages.
+*Connector* was created by the RTI Research Group to quickly and easily develop
+demos and proof of concept. We think that it can be useful for anybody who needs
+a quick way to script tests and interact with DDS using different scripting
+languages.
 
 It can be used to quickly create tests for your distributed system and, thanks
 to the binding with scripting languages and the use of XML, to easily integrate
@@ -33,7 +35,8 @@ git submodule update --init --recurse
 ```
 
 The native libraries have been built for few architectures only.
-If you need another architecture, please contact your RTI account manager or sales@rti.com.
+If you need another architecture, please contact your RTI account manager or
+sales@rti.com.
 
 If you want to check the version of the libraries, run the following command:
 
@@ -65,7 +68,7 @@ Then clone the repository and compile the API:
 git clone https://github.com/rticommunity/rticonnextdds-connector-cs --recursive
 
 # Go to the Connector directory
-cd rticonnextdds-connector-cs/
+cd rticonnextdds-connector-cs/src
 
 # To build with .NET Core you need this step too
 cd Connector && dotnet restore && cd ..
@@ -75,7 +78,7 @@ cd Connector && dotnet restore && cd ..
 msbuild
 ```
 
-* From Visual Studio or Monodevelop open *Connector-VS.sln*.
+* From Visual Studio or Monodevelop open *src/Connector-VS.sln*.
 
 ## Support
 
@@ -86,11 +89,19 @@ We'd love your feedback.
 
 ## License
 
-With the sole exception of the contents of the "examples" subdirectory, all use of this product is subject to the RTI Software License Agreement included at the top level of this repository. Files within the "examples" subdirectory are licensed as marked within the file.
+With the sole exception of the contents of the "examples" subdirectory,
+all use of this product is subject to the RTI Software License Agreement
+included at the top level of this repository. Files within the "examples"
+subdirectory are licensed as marked within the file.
 
-This software is an experimental ("pre-production") product. The Software is provided "as is," with no warranty of any type, including any warranty for fitness for any purpose. RTI is under no obligation to maintain or support the software. RTI shall not be liable for any incidental or consequential damages arising out of the use or inability to use the software.
+This software is an experimental ("pre-production") product. The Software is
+provided "as is," with no warranty of any type, including any warranty for
+fitness for any purpose. RTI is under no obligation to maintain or support the
+software. RTI shall not be liable for any incidental or consequential damages
+arising out of the use or inability to use the software.
 
-The following non-RTI software is included in this distribution under the corresponding license:
+The following non-RTI software is included in this distribution under the
+corresponding license:
 
     Newtonsoft.Json https://www.newtonsoft.com/json
 

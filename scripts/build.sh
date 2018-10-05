@@ -9,7 +9,7 @@ function compile {
     msbuild /v:minimal "$1"/$2.sln
 }
 
-compile "${REPO_DIR}" Connector
+compile "${REPO_DIR}/src" Connector
 compile "${REPO_DIR}/examples/Simple/" Simple
 compile "${REPO_DIR}/examples/Mixed/" Mixed
 compile "${REPO_DIR}/examples/Objects/" Objects

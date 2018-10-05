@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
-    <ProjectReference Include="..\..\Connector\Connector.csproj" />
+    <ProjectReference Include="..\..\src\Connector\Connector.csproj" />
   </ItemGroup>
   <ItemGroup>
     <None Update="ShapeExample.xml">
