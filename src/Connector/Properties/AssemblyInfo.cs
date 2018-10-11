@@ -1,4 +1,4 @@
-﻿// (c) 2017 Copyright, Real-Time Innovations, All rights reserved.
+// (c) 2017 Copyright, Real-Time Innovations, All rights reserved.
 //
 // RTI grants Licensee a license to use, modify, compile, and create
 // derivative works of the Software.  Licensee has the right to distribute
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCopyright("(c) Copyright, Real-Time Innovations, 2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
-[assembly: AssemblyVersion("0.3.2")]
+[assembly: AssemblyVersion("0.3.3")]
 [assembly: CLSCompliant(true)]
 [assembly: ComVisible(true)]
 [assembly: InternalsVisibleTo("librtiddsconnector_dotnet.UnitTests")]
