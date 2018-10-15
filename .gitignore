@@ -15,10 +15,13 @@ packages/
 # Linters and test runners
 StyleCopViolations.xml
 TestResult.xml
-gendarme_report.html
-coverage-report/
+coverage_report/
+coverage.xml
 
 # Doc
 docs/api
 docs/_site
 docs/_site_pdf
+
+# Cake
+tools/
