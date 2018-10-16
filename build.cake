@@ -13,6 +13,7 @@
 #addin "altcover.api"
 #tool "NUnit.ConsoleRunner"
 #tool "ReportGenerator"
+#tool "docfx.console"
 
 var target = Argument("target", "Default");
 var configuration = Argument("configuration", "Debug");
@@ -190,18 +191,87 @@ public void TestWithAltCover(string projectPath, string assembly, string outputX
     NUnit3($"{outputDir}/{assembly}", nunitSettings);
 }
 
-Task("Generate-DocWeb")
-    .Description("Generate a static web with the documentation")
+Task("Fix-DocFx")
+    .Description("Workaround for issue #3389: missing dependency")
     .Does(() =>
 {
+    // Workaround for
+    // https://github.com/dotnet/docfx/issues/3389
+    NuGetInstall("SQLitePCLRaw.core", new NuGetInstallSettings {
+        ExcludeVersion  = true,
+        OutputDirectory = "./tools"
+    });
+
+    CopyFileToDirectory(
+        "tools/SQLitePCLRaw.core/lib/net45/SQLitePCLRaw.core.dll",
+        GetDirectories("tools/docfx.console.*").Single().Combine("tools"));
+});
+
+Task("Generate-DocWeb")
+    .Description("Generate a static web with the documentation")
+    .IsDependentOn("Build-API")
+    .IsDependentOn("Fix-DocFx")
+    .Does(() =>
+{
+    DocFxMetadata("docs/docfx.json");
     DocFxBuild("docs/docfx.json");
 });
 
 Task("Generate-DocPdf")
     .Description("Generate a PDF with the documentation")
+    .IsDependentOn("Build-API")
+    .IsDependentOn("Fix-DocFx")
     .Does(() =>
 {
+    DocFxMetadata("docs/docfx.json");
     DocFxPdf("docs/docfx.json");
+});
+
+Task("Update-DocRepo")
+    .Description("Commit and push the latest documentation to the repository")
+    .IsDependentOn("Generate-DocWeb")
+    .Does(() =>
+{
+   int retcode;
+
+    // Clone or pull
+    var repo_doc = Directory("docs/repo");
+    if (!DirectoryExists(repo_doc)) {
+        retcode = StartProcess(
+            "git",
+            $"clone git@github.com:rticommunity/rticonnextdds-connector-cs {repo_doc} -b gh-pages");
+        if (retcode != 0) {
+            throw new Exception("Cannot clone repository");
+        }
+    } else {
+        retcode = StartProcess("git", new ProcessSettings {
+            Arguments = "pull",
+            WorkingDirectory = repo_doc
+        });
+        if (retcode != 0) {
+            throw new Exception("Cannot pull repository");
+        }
+    }
+
+    // Copy the content of the web
+    CopyDirectory("docs/_site", repo_doc);
+
+    // Commit and push
+    retcode = StartProcess("git", new ProcessSettings {
+        Arguments = "commit -a -m ':books: Update doc from cake'",
+        WorkingDirectory = repo_doc
+    });
+    if (retcode != 0) {
+        throw new Exception("Cannot commit doc repo");
+    }
+
+    retcode = StartProcess("git", new ProcessSettings {
+        Arguments = "push origin gh-pages",
+        WorkingDirectory = repo_doc
+    });
+    if (retcode != 0) {
+        throw new Exception("Cannot push doc repo");
+    }
 });
 
 Task("Default")
