@@ -119,7 +119,7 @@ Task("Run-AltCover")
 
 Task("Test-Quality")
     .Description("Run quality assurance tasks")
-    .IsDependentOn("Run-Linter-Gendarme");
+    .IsDependentOn("Run-Linter-Gendarme")
     .IsDependentOn("Run-AltCover");
 
 Task("Fix-DocFx")
