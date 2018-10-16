@@ -69,44 +69,6 @@ Task("Run-UnitTests")
     DotNetCoreTest(testProject, netcoreSettings);
 });
 
-public string GetLoadLibraryEnvVar()
-{
-    if (IsRunningOnWindows()) {
-        return "PATH";
-    } else if (IsRunningOnMacOSX()) {
-        return "DYLD_LIBRARY_PATH";
-    } else if (IsRunningOnUnix()) {
-        return "LD_LIBRARY_PATH";
-    }
-
-    throw new Exception("Unsupported platform");
-}
-
-public string GetNativeLibraryPath(bool x86 = false)
-{
-    string arch;
-    if (IsRunningOnWindows()) {
-        arch = x86 ? "i86Win32VS2010" : "x64Win64VS2013";
-    } else if (IsRunningOnMacOSX()) {
-        if (x86) {
-            throw new Exception("32-bits not supported on MacOSX");
-        }
-
-        arch = "x64Darwin16clang8.0";
-    } else if (IsRunningOnUnix()) {
-        arch = x86 ? "i86Linux3.xgcc4.6.3" : "x64Linux2.6gcc4.4.5";
-    } else {
-        throw new Exception("Unsupported platform");
-    }
-
-    return MakeAbsolute(Directory($"rticonnextdds-connector/lib/{arch}")).FullPath;
-}
-
-public bool IsRunningOnMacOSX()
-{
-    return Environment.OSVersion.Platform == PlatformID.MacOSX;
-}
-
 Task("Run-Linter-Gendarme")
     .IsDependentOn("Build-API")
     .Does(() =>
@@ -126,14 +88,6 @@ Task("Run-Linter-Gendarme")
         "src/Connector/Gendarme.ignore");
 });
 
-public void RunGendarme(string gendarme, string assembly, string ignore)
-{
-    var retcode = StartProcess(gendarme, $"--ignore {ignore} {assembly}");
-    if (retcode != 0) {
-        throw new Exception($"Gendarme found errors on {assembly}");
-    }
-}
-
 Task("Run-AltCover")
     .IsDependentOn("Build-API")
     .Does(() =>
@@ -145,13 +99,13 @@ Task("Run-AltCover")
         "coverage.xml");
 
     // Create the report
+    var reportTypes = new[] {
+        ReportGeneratorReportType.Html,
+        ReportGeneratorReportType.XmlSummary };
     ReportGenerator(
         "coverage.xml",
         "coverage_report",
-        new ReportGeneratorSettings {
-            ReportTypes = new[] {
-                ReportGeneratorReportType.Html,
-                ReportGeneratorReportType.XmlSummary } });
+        new ReportGeneratorSettings { ReportTypes = reportTypes });
 
     // Get final result
     var xml = System.Xml.Linq.XDocument.Load("coverage_report/Summary.xml");
@@ -163,33 +117,10 @@ Task("Run-AltCover")
     }
 });
 
-public void TestWithAltCover(string projectPath, string assembly, string outputXml)
-{
-    string inputDir = $"{projectPath}/bin/{configuration}/net45";
-    string outputDir = $"{inputDir}/__Instrumented";
-    if (DirectoryExists(outputDir)) {
-        DeleteDirectory(
-            outputDir,
-            new DeleteDirectorySettings { Recursive = true });
-    }
-
-    var altcoverArgs = new AltCover.PrepareArgs {
-        InputDirectory = inputDir,
-        OutputDirectory = outputDir,
-        AssemblyFilter = new[] { "nunit.framework" },
-        XmlReport = outputXml,
-        OpenCover = true
-    };
-    Prepare(altcoverArgs);
-
-    var nunitSettings = new NUnit3Settings {
-        EnvironmentVariables = new Dictionary<string, string> {
-            { GetLoadLibraryEnvVar(), GetNativeLibraryPath() }
-        },
-        NoResults = true
-    };
-    NUnit3($"{outputDir}/{assembly}", nunitSettings);
-}
+Task("Test-Quality")
+    .Description("Run quality assurance tasks")
+    .IsDependentOn("Run-Linter-Gendarme");
+    .IsDependentOn("Run-AltCover");
 
 Task("Fix-DocFx")
     .Description("Workaround for issue #3389: missing dependency")
@@ -278,7 +209,88 @@ Task("Default")
     .IsDependentOn("Build-API")
     .IsDependentOn("Build-Examples")
     .IsDependentOn("Run-UnitTests")
-    .IsDependentOn("Run-Linter-Gendarme")
-    .IsDependentOn("Run-AltCover");
+    .IsDependentOn("Test-Quality");
+
+Task("Travis")
+    .IsDependentOn("Build-API")
+    .IsDependentOn("Build-Examples")
+    .IsDependentOn("Run-UnitTests")
+    .IsDependentOn("Test-Quality")
+    .IsDependentOn("Generate-DocWeb");  // Validate documentation but don't update
 
 RunTarget(target);
+
+
+public string GetLoadLibraryEnvVar()
+{
+    if (IsRunningOnWindows()) {
+        return "PATH";
+    } else if (IsRunningOnMacOSX()) {
+        return "DYLD_LIBRARY_PATH";
+    } else if (IsRunningOnUnix()) {
+        return "LD_LIBRARY_PATH";
+    }
+
+    throw new Exception("Unsupported platform");
+}
+
+public string GetNativeLibraryPath(bool x86 = false)
+{
+    string arch;
+    if (IsRunningOnWindows()) {
+        arch = x86 ? "i86Win32VS2010" : "x64Win64VS2013";
+    } else if (IsRunningOnMacOSX()) {
+        if (x86) {
+            throw new Exception("32-bits not supported on MacOSX");
+        }
+
+        arch = "x64Darwin16clang8.0";
+    } else if (IsRunningOnUnix()) {
+        arch = x86 ? "i86Linux3.xgcc4.6.3" : "x64Linux2.6gcc4.4.5";
+    } else {
+        throw new Exception("Unsupported platform");
+    }
+
+    return MakeAbsolute(Directory($"rticonnextdds-connector/lib/{arch}")).FullPath;
+}
+
+public bool IsRunningOnMacOSX()
+{
+    return Environment.OSVersion.Platform == PlatformID.MacOSX;
+}
+
+public void RunGendarme(string gendarme, string assembly, string ignore)
+{
+    var retcode = StartProcess(gendarme, $"--ignore {ignore} {assembly}");
+    if (retcode != 0) {
+        throw new Exception($"Gendarme found errors on {assembly}");
+    }
+}
+
+public void TestWithAltCover(string projectPath, string assembly, string outputXml)
+{
+    string inputDir = $"{projectPath}/bin/{configuration}/net45";
+    string outputDir = $"{inputDir}/__Instrumented";
+    if (DirectoryExists(outputDir)) {
+        DeleteDirectory(
+            outputDir,
+            new DeleteDirectorySettings { Recursive = true });
+    }
+
+    var altcoverArgs = new AltCover.PrepareArgs {
+        InputDirectory = inputDir,
+        OutputDirectory = outputDir,
+        AssemblyFilter = new[] { "nunit.framework" },
+        XmlReport = outputXml,
+        OpenCover = true
+    };
+    Prepare(altcoverArgs);
+
+    var nunitSettings = new NUnit3Settings {
+        EnvironmentVariables = new Dictionary<string, string> {
+            { GetLoadLibraryEnvVar(), GetNativeLibraryPath() }
+        },
+        NoResults = true
+    };
+    NUnit3($"{outputDir}/{assembly}", nunitSettings);
+}

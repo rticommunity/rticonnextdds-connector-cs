@@ -1,0 +1,14 @@
+## Travis CI Integration
+language: csharp
+
+matrix:
+  include:
+    - os: linux
+      dist: trusty
+      mono: latest
+    - os: osx
+      osx_image: xcode10
+      mono: latest
+
+script:
+- ./build.sh --target=Travis --verbosity=diagnostic
