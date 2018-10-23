@@ -254,9 +254,25 @@ public string GetNativeLibraryPath(bool x86 = false)
     return MakeAbsolute(Directory($"rticonnextdds-connector/lib/{arch}")).FullPath;
 }
 
+[DllImport("libc")]
+static extern int uname(IntPtr buf);
+
 public bool IsRunningOnMacOSX()
 {
-    return Environment.OSVersion.Platform == PlatformID.MacOSX;
+    bool isMac = false;
+    if (Environment.OSVersion.Platform == PlatformID.Unix) {
+        IntPtr buf = Marshal.AllocHGlobal(8192);
+        try {
+            if (uname(buf) == 0) {
+                var unameText = Marshal.PtrToStringAnsi(buf);
+                isMac = (unameText == "Darwin");
+            }
+        } finally {
+            Marshal.FreeHGlobal(buf);
+        }
+    }
+
+    return isMac;
 }
 
 public void RunGendarme(string gendarme, string assembly, string ignore)
