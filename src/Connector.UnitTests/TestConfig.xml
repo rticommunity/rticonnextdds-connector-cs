@@ -17,7 +17,18 @@
     <qos_library name="QosLibrary">
         <qos_profile name="DefaultProfile"
                 base_name="BuiltinQosLibExp::Generic.StrictReliable"
-                is_default_qos="true"/>
+                is_default_qos="true" >
+            <participant_qos>
+                <transport_builtin>
+                    <!--
+                        Disable SharedMemory because it gives problems
+                        on Mac OS running from Travis CI. More info at:
+                        https://community.rti.com/kb/rti-connext-dds-510-shared-memory-issues-running-applications-mac-os-x
+                     -->
+                    <mask>UDPv4</mask>
+                </transport_builtin>
+            </participant_qos>
+        </qos_profile>
     </qos_library>
 
     <!-- types -->
