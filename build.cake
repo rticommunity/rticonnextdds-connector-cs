@@ -15,6 +15,9 @@
 #tool "ReportGenerator"
 #tool "docfx.console"
 
+// For the logic to detect Mac OS
+using System.Runtime.InteropServices;
+
 var target = Argument("target", "Default");
 var configuration = Argument("configuration", "Debug");
 
