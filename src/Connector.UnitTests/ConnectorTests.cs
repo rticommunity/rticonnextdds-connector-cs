@@ -219,7 +219,7 @@ namespace RTI.Connext.Connector.UnitTests
                 Stopwatch watch = Stopwatch.StartNew();
                 Assert.IsFalse(connector.Wait(100));
                 watch.Stop();
-                Assert.Less(watch.ElapsedMilliseconds, 130);
+                Assert.Less(watch.ElapsedMilliseconds, 110);
                 Assert.Greater(watch.ElapsedMilliseconds, 90);
             }
         }
@@ -231,7 +231,7 @@ namespace RTI.Connext.Connector.UnitTests
                 Stopwatch watch = Stopwatch.StartNew();
                 Assert.IsFalse(connector.Wait(1000));
                 watch.Stop();
-                Assert.Less(watch.ElapsedMilliseconds, 1100);
+                Assert.Less(watch.ElapsedMilliseconds, 1010);
                 Assert.Greater(watch.ElapsedMilliseconds, 990);
             }
         }

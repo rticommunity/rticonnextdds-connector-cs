@@ -10,7 +10,15 @@ matrix:
     - os: osx
       osx_image: xcode10
       mono: latest
-      dotnet: 2.1.403  # Installed by downloading manually packages.
+      dotnet: 2.1.500  # Installed by downloading manually packages.
+
+before_script:
+# Avoid problems with share memory by increasing the kernel limits
+- sudo /usr/sbin/sysctl -w kern.sysv.shmmax=419430400
+- sudo /usr/sbin/sysctl -w kern.sysv.shmmin=1
+- sudo /usr/sbin/sysctl -w kern.sysv.shmmni=128
+- sudo /usr/sbin/sysctl -w kern.sysv.shmseg=1024
+- sudo /usr/sbin/sysctl -w kern.sysv.shmall=262144
 
 script:
 - ./build.sh --target=Travis --verbosity=diagnostic

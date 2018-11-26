@@ -1,6 +1,7 @@
 # RTI Connector C# / .NET for Connext DDS
 
 [![Build Status](https://www.travis-ci.org/rticommunity/rticonnextdds-connector-cs.svg?branch=master)](https://www.travis-ci.org/rticommunity/rticonnextdds-connector-cs)
+[![codecov](https://codecov.io/gh/rticommunity/rticonnextdds-connector-cs/branch/master/graph/badge.svg)](https://codecov.io/gh/rticommunity/rticonnextdds-connector-cs)
 
 *RTI Connector* for Connext DDS is a quick and easy way to access the power and
 functionality of [RTI Connext DDS](http://www.rti.com/products/index.html).
