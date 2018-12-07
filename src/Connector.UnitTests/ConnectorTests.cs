@@ -220,7 +220,7 @@ namespace RTI.Connext.Connector.UnitTests
 
             // Travis CI build machine are quite slow, especially in Mac.
             if (Environment.GetEnvironmentVariable("TRAVIS") == "true") {
-                margin = 50;
+                margin = 200;
             }
 
             using (var connector = TestResources.CreateSubscriberConnector()) {
@@ -240,7 +240,7 @@ namespace RTI.Connext.Connector.UnitTests
 
             // Travis CI build machine are quite slow, especially in Mac.
             if (Environment.GetEnvironmentVariable("TRAVIS") == "true") {
-                margin = 500;
+                margin = 2000;
             }
 
             using (var connector = TestResources.CreateSubscriberConnector()) {

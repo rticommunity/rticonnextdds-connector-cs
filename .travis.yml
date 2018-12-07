@@ -14,11 +14,14 @@ matrix:
 
 before_script:
 # Avoid problems with share memory by increasing the kernel limits
-- sudo sysctl -w kern.sysv.shmmax=419430400
-- sudo sysctl -w kern.sysv.shmmin=1
-- sudo sysctl -w kern.sysv.shmmni=128
-- sudo sysctl -w kern.sysv.shmseg=1024
-- sudo sysctl -w kern.sysv.shmall=262144
+- |
+  if [[ $TRAVIS_OS_NAME == "osx" ]]; then
+    sudo sysctl -w kern.sysv.shmmax=419430400
+    sudo sysctl -w kern.sysv.shmmin=1
+    sudo sysctl -w kern.sysv.shmmni=128
+    sudo sysctl -w kern.sysv.shmseg=1024
+    sudo sysctl -w kern.sysv.shmall=262144
+  fi
 
 script:
 - ./build.sh --target=Travis --verbosity=diagnostic
