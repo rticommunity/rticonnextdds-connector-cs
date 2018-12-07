@@ -215,24 +215,40 @@ namespace RTI.Connext.Connector.UnitTests
         [Test, Timeout(1000)]
         public void WaitForSamplesCanDoMsTimeOut()
         {
+            int wait = 100;
+            int margin = 10;
+
+            // Travis CI build machine are quite slow, especially in Mac.
+            if (Environment.GetEnvironmentVariable("TRAVIS") == "true") {
+                margin = 50;
+            }
+
             using (var connector = TestResources.CreateSubscriberConnector()) {
                 Stopwatch watch = Stopwatch.StartNew();
-                Assert.IsFalse(connector.Wait(100));
+                Assert.IsFalse(connector.Wait(wait));
                 watch.Stop();
-                Assert.Less(watch.ElapsedMilliseconds, 110);
-                Assert.Greater(watch.ElapsedMilliseconds, 90);
+                Assert.Less(watch.ElapsedMilliseconds, wait + margin);
+                Assert.Greater(watch.ElapsedMilliseconds, wait - margin);
             }
         }
 
         [Test, Timeout(5000)]
         public void WaitForSamplesCanDoOneSecTimeOut()
         {
+            int wait = 1000;
+            int margin = 10;
+
+            // Travis CI build machine are quite slow, especially in Mac.
+            if (Environment.GetEnvironmentVariable("TRAVIS") == "true") {
+                margin = 500;
+            }
+
             using (var connector = TestResources.CreateSubscriberConnector()) {
                 Stopwatch watch = Stopwatch.StartNew();
-                Assert.IsFalse(connector.Wait(1000));
+                Assert.IsFalse(connector.Wait(wait));
                 watch.Stop();
-                Assert.Less(watch.ElapsedMilliseconds, 1010);
-                Assert.Greater(watch.ElapsedMilliseconds, 990);
+                Assert.Less(watch.ElapsedMilliseconds, wait + margin);
+                Assert.Greater(watch.ElapsedMilliseconds, wait - margin);
             }
         }
 #endif
