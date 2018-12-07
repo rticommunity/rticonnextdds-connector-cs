@@ -18,6 +18,10 @@
 // For the logic to detect Mac OS
 using System.Runtime.InteropServices;
 
+var netFrameworkVersion = "net35";
+var netCoreVersion = "netcoreapp2.1";
+var netStandardVersion = "netstandard1.1";
+
 var target = Argument("target", "Default");
 var configuration = Argument("configuration", "Debug");
 
@@ -30,12 +34,14 @@ var msbuildConfig = new MSBuildSettings {
 };
 
 Task("Build-API")
+    .Description("Build the API")
     .Does(() =>
 {
     MSBuild("src/Connector.sln", msbuildConfig);
 });
 
 Task("Build-Examples")
+    .Description("Build example projects")
     .IsDependentOn("Build-API")
     .Does(() =>
 {
@@ -45,34 +51,35 @@ Task("Build-Examples")
 });
 
 Task("Run-UnitTests")
+    .Description("Run unit tests")
     .IsDependentOn("Build-API")
     .Does(() =>
 {
     string testProjectDir = "src/Connector.UnitTests";
     string testProject = $"{testProjectDir}/Connector.UnitTests.csproj";
+    var environment = new Dictionary<string, string> {
+        { GetLoadLibraryEnvVar(), GetNativeLibraryPath() }
+    };
 
     // NUnit3 to test libraries with .NET Framework / Mono
     var nunitSettings = new NUnit3Settings {
-        EnvironmentVariables = new Dictionary<string, string> {
-            { GetLoadLibraryEnvVar(), GetNativeLibraryPath() }
-        }
+        EnvironmentVariables = environment
     };
     NUnit3(
-        $"{testProjectDir}/bin/{configuration}/net45/*.UnitTests.dll",
+        $"{testProjectDir}/bin/{configuration}/{netFrameworkVersion}/*.UnitTests.dll",
         nunitSettings);
 
     // .NET Core test library
     var netcoreSettings = new DotNetCoreTestSettings {
-        EnvironmentVariables = new Dictionary<string, string> {
-            { GetLoadLibraryEnvVar(), GetNativeLibraryPath() }
-        },
+        EnvironmentVariables = environment,
         NoBuild = true,
-        Framework = "netcoreapp2.1"
+        Framework = netCoreVersion
     };
     DotNetCoreTest(testProject, netcoreSettings);
 });
 
 Task("Run-Linter-Gendarme")
+    .Description("Run static analyzer Gendarme")
     .IsDependentOn("Build-API")
     .Does(() =>
 {
@@ -87,11 +94,12 @@ Task("Run-Linter-Gendarme")
 
     RunGendarme(
         gendarme,
-        $"src/Connector/bin/{configuration}/net35/librtiddsconnector_dotnet.dll",
+        $"src/Connector/bin/{configuration}/{netFrameworkVersion}/librtiddsconnector_dotnet.dll",
         "src/Connector/Gendarme.ignore");
 });
 
 Task("Run-AltCover")
+    .Description("Run test coverage with AltCover")
     .IsDependentOn("Build-API")
     .Does(() =>
 {

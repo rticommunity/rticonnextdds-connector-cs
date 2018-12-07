@@ -25,3 +25,7 @@ before_script:
 
 script:
 - ./build.sh --target=Travis --verbosity=diagnostic
+
+after_success:
+# Upload results to codecov
+- bash <(curl -s https://codecov.io/bash)
