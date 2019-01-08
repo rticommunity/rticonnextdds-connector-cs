@@ -7,13 +7,21 @@
 // for any purpose. RTI is under no obligation to maintain or support the
 // Software.  RTI shall not be liable for any incidental or consequential
 // damages arising out of the use or inability to use the software.
-#addin "Cake.Compression"
-#addin "SharpZipLib"
-#addin "cake.docfx"
-#addin "altcover.api"
-#tool "NUnit.ConsoleRunner"
-#tool "ReportGenerator"
-#tool "docfx.console"
+
+// NUnit tests
+#tool nuget:?package=NUnit.ConsoleRunner&version=3.9.0
+
+// Gendarme: decompress zip
+#addin nuget:?package=Cake.Compression&loaddependencies=true&version=0.2.1
+
+
+// Test coverage
+#addin nuget:?package=altcover.api&version=5.0.663
+#tool nuget:?package=ReportGenerator&version=4.0.5
+
+// Documentation
+#addin nuget:?package=Cake.DocFx&version=0.11.0
+#tool nuget:?package=docfx.console&version=2.40.7
 
 // For the logic to detect Mac OS
 using System.Runtime.InteropServices;
@@ -120,18 +128,15 @@ Task("Run-AltCover")
 
     // Get final result
     var xml = System.Xml.Linq.XDocument.Load("coverage_report/Summary.xml");
-    var coverage = xml.Root.Element("Summary").Element("Linecoverage").Value;
-    if (coverage == "100%") {
+    var xmlSummary = xml.Root.Element("Summary");
+    var covered = xmlSummary.Element("Coveredlines").Value;
+    var coverable = xmlSummary.Element("Coverablelines").Value;
+    if (covered == coverable) {
         Information("Full coverage!");
     } else {
-        Error($"Missing coverage: {coverage}");
+        Error($"Missing coverage: {covered} of {coverable}");
     }
 });
-
-Task("Test-Quality")
-    .Description("Run quality assurance tasks")
-    .IsDependentOn("Run-Linter-Gendarme")
-    .IsDependentOn("Run-AltCover");
 
 Task("Fix-DocFx")
     .Description("Workaround for issue #3389: missing dependency")
@@ -220,13 +225,14 @@ Task("Default")
     .IsDependentOn("Build-API")
     .IsDependentOn("Build-Examples")
     .IsDependentOn("Run-UnitTests")
-    .IsDependentOn("Test-Quality");
+    .IsDependentOn("Run-AltCover");
 
 Task("Travis")
     .IsDependentOn("Build-API")
     .IsDependentOn("Build-Examples")
     .IsDependentOn("Run-UnitTests")
-    .IsDependentOn("Test-Quality")
+    .IsDependentOn("Run-Linter-Gendarme")
+    .IsDependentOn("Run-AltCover")
     .IsDependentOn("Generate-DocWeb");  // Validate documentation but don't update
 
 RunTarget(target);
@@ -304,10 +310,10 @@ public void TestWithAltCover(string projectPath, string assembly, string outputX
             new DeleteDirectorySettings { Recursive = true });
     }
 
-    var altcoverArgs = new AltCover.PrepareArgs {
+    var altcoverArgs = new AltCover.Parameters.Primitive.PrepareArgs {
         InputDirectory = inputDir,
         OutputDirectory = outputDir,
-        AssemblyFilter = new[] { "nunit.framework" },
+        AssemblyFilter = new[] { "nunit.framework", "NUnit3" },
         XmlReport = outputXml,
         OpenCover = true
     };
