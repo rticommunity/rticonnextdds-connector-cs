@@ -2,26 +2,18 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Library</OutputType>
+    <AssemblyName>RTI.Connext.Connector.UnitTests</AssemblyName>
+    <Product>RTI Connector for Connext DDS</Product>
+    <Version>0.3.3-beta02</Version>
+    <Description>.NET API unit tests for RTI Connector</Description>
+
+    <Company>RTI</Company>
+    <Copyright>(c) Copyright, Real-Time Innovations, 2017</Copyright>
+    <RepositoryUrl>https://github.com/rticommunity/rticonnextdds-connector-cs</RepositoryUrl>
+
+    <TargetFrameworks>net45;netcoreapp2.2</TargetFrameworks>
     <RootNamespace>RTI.Connext.Connector.UnitTests</RootNamespace>
-    <AssemblyName>librtiddsconnector_dotnet.UnitTests</AssemblyName>
-    <TargetFrameworks>net45;netcoreapp2.1</TargetFrameworks>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <ReleaseVersion>0.3.3</ReleaseVersion>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug</OutputPath>
-    <DefineConstants>DEBUG;</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release</OutputPath>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>StyleCop.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="nunit.framework" />
@@ -33,7 +25,7 @@
       <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.5.0" />
       <PackageReference Include="Mono.Cecil" Version="0.10.0-beta6" />
       <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
-</ItemGroup>
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Connector\Connector.csproj" />
   </ItemGroup>

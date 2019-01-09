@@ -1,0 +1,3 @@
+Please read the PDF license from any of the following locations:
+* File "LICENSE.PDF"
+* URL: https://github.com/rticommunity/rticonnextdds-connector-cs/raw/master/LICENSE.pdf

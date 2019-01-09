@@ -26,8 +26,8 @@
 // For the logic to detect Mac OS
 using System.Runtime.InteropServices;
 
-var netFrameworkVersion = "net35";
-var netCoreVersion = "netcoreapp2.1";
+var netFrameworkVersion = "net45";
+var netCoreVersion = "netcoreapp2.2";
 var netStandardVersion = "netstandard1.1";
 
 var target = Argument("target", "Default");
@@ -91,18 +91,20 @@ Task("Run-Linter-Gendarme")
     .IsDependentOn("Build-API")
     .Does(() =>
 {
-    var mono_tools = DownloadFile("https://github.com/pleonex/mono-tools/releases/download/v4.2.2/mono-tools-v4.2.2.zip");
-    ZipUncompress(mono_tools, "tools/mono_tools");
+    if (IsRunningOnWindows()) {
+        throw new Exception("Gendarme is not supported on Windows");
+    }
+
+    var monoTools = DownloadFile("https://github.com/pleonex/mono-tools/releases/download/v4.2.2/mono-tools-v4.2.2.zip");
+    ZipUncompress(monoTools, "tools/mono_tools");
     var gendarme = "tools/mono_tools/bin/gendarme";
-    if (!IsRunningOnWindows()) {
-        if (StartProcess("chmod", $"+x {gendarme}") != 0) {
-            Error("Cannot change gendarme permissions");
-        }
+    if (StartProcess("chmod", $"+x {gendarme}") != 0) {
+        Error("Cannot change gendarme permissions");
     }
 
     RunGendarme(
         gendarme,
-        $"src/Connector/bin/{configuration}/{netFrameworkVersion}/librtiddsconnector_dotnet.dll",
+        $"src/Connector/bin/{configuration}/{netStandardVersion}/RTI.Connext.Connector.dll",
         "src/Connector/Gendarme.ignore");
 });
 
@@ -114,7 +116,7 @@ Task("Run-AltCover")
     // Configure the tests to run with code coverate
     TestWithAltCover(
         "src/Connector.UnitTests",
-        "librtiddsconnector_dotnet.UnitTests.dll",
+        "RTI.Connext.Connector.UnitTests.dll",
         "coverage.xml");
 
     // Create the report
@@ -313,7 +315,10 @@ public void TestWithAltCover(string projectPath, string assembly, string outputX
     var altcoverArgs = new AltCover.Parameters.Primitive.PrepareArgs {
         InputDirectory = inputDir,
         OutputDirectory = outputDir,
-        AssemblyFilter = new[] { "nunit.framework", "NUnit3" },
+        AssemblyFilter = new[] {
+            "nunit.framework",
+            "NUnit3",
+            "RTI.Connext.Connector.UnitTests" },
         XmlReport = outputXml,
         OpenCover = true
     };

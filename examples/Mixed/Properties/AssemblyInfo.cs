@@ -9,16 +9,9 @@
 // damages arising out of the use or inability to use the software.
 using System;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("RTI Connector C# Mixed Example")]
-[assembly: AssemblyDescription("Mixed example for .NET API of RTI Connector")]
-[assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Real-Time Innovations, Inc.")]
-[assembly: AssemblyProduct("RTI Connext DDS")]
-[assembly: AssemblyCopyright("")]
-[assembly: AssemblyTrademark("")]
-[assembly: AssemblyCulture("")]
-[assembly: AssemblyVersion("1.0")]
 [assembly: CLSCompliant(true)]
 [assembly: ComVisible(true)]
+[assembly: InternalsVisibleTo("RTI.Connext.Connector.UnitTests")]

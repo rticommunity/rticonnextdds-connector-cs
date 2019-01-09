@@ -12,15 +12,6 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("RTI Connext DDS Connector")]
-[assembly: AssemblyDescription(".NET API for RTI Connector")]
-[assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Real-Time Innovations, Inc.")]
-[assembly: AssemblyProduct("RTI Connext DDS Connector")]
-[assembly: AssemblyCopyright("(c) Copyright, Real-Time Innovations, 2017")]
-[assembly: AssemblyTrademark("")]
-[assembly: AssemblyCulture("")]
-[assembly: AssemblyVersion("0.3.3")]
 [assembly: CLSCompliant(true)]
 [assembly: ComVisible(true)]
-[assembly: InternalsVisibleTo("librtiddsconnector_dotnet.UnitTests")]
+[assembly: InternalsVisibleTo("RTI.Connext.Connector.UnitTests")]

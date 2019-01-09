@@ -6,7 +6,7 @@ uid: api_overview
 
 ## Import the RTI Connector library
 
-Import the `librtiddsconnector_dotnet.dll` library to start using *Connector*. The API is under the namespace `RTI.Connext.Connector`.
+Import the `RTI.Connext.Connector.dll` library to start using *Connector*. The API is under the namespace `RTI.Connext.Connector`.
 
 Make sure that the directory with the native library at
 _rticonnextdds-connector/lib/[arch]_ is in your `PATH` environment variable.

@@ -6,11 +6,11 @@ matrix:
     - os: linux
       dist: trusty
       mono: latest
-      dotnet: 2.1  # Installed by apt-get, it installs the latest 2.1.X
+      dotnet: 2.2  # Installed by apt-get, it installs the latest 2.1.X
     - os: osx
       osx_image: xcode10
       mono: latest
-      dotnet: 2.1.500  # Installed by downloading manually packages.
+      dotnet: 2.2.101  # Installed by downloading manually packages.
 
 before_script:
 # Avoid problems with share memory by increasing the kernel limits

@@ -2,11 +2,21 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Library</OutputType>
+    <AssemblyName>RTI.Connext.Connector</AssemblyName>
+    <Product>RTI Connector for Connext DDS</Product>
+    <Version>0.3.3-beta02</Version>
+    <Description>.NET API for RTI Connector</Description>
+
+    <Company>RTI</Company>
+    <Copyright>(c) Copyright, Real-Time Innovations, 2017</Copyright>
+    <PackageProjectUrl>https://rticommunity.github.io/rticonnextdds-connector-cs/</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/rticommunity/rticonnextdds-connector-cs</RepositoryUrl>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+    <PackageTags>dds;iiot;databus;connextdds</PackageTags>
+
+    <TargetFrameworks>netstandard1.1;net35</TargetFrameworks>
     <RootNamespace>RTI.Connext.Connector</RootNamespace>
-    <AssemblyName>librtiddsconnector_dotnet</AssemblyName>
-    <TargetFrameworks>net35;netstandard1.1;netcoreapp1.0;netcoreapp2.1</TargetFrameworks>
-    <ReleaseVersion>0.3.3</ReleaseVersion>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <CodeAnalysisRuleSet>..\StyleCop.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
@@ -16,5 +26,9 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\LICENSE.txt" Pack="true" PackagePath=""/>
+    <None Include="..\..\LICENSE.pdf" Pack="true" PackagePath=""/>
   </ItemGroup>
 </Project>

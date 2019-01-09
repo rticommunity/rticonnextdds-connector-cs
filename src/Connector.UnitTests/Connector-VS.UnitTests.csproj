@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>RTI.Connector.UnitTests</RootNamespace>
-    <AssemblyName>librtiddsconnector_dotnet.UnitTests</AssemblyName>
+    <AssemblyName>RTI.Connext.Connector.UnitTests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <IsCodedUITest>False</IsCodedUITest>
@@ -46,7 +46,6 @@
   <ItemGroup>
     <Compile Include="ConnectorTests.cs" />
     <Compile Include="InstanceTests.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="InputTests.cs" />
     <Compile Include="SampleTests.cs" />
     <Compile Include="TestResources.cs" />

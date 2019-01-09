@@ -1,5 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <AssemblyName>Mixed</AssemblyName>
+    <Product>RTI Connector for Connext DDS</Product>
+    <Version>0.3.3-beta02</Version>
+    <Description>Mixed example for .NET API of RTI Connector</Description>
+    <Company>RTI</Company>
+    <Copyright>(c) Copyright, Real-Time Innovations, 2017</Copyright>
+
+    <TargetFrameworks>net35;netcoreapp2.2</TargetFrameworks>
+    <RootNamespace>Mixed</RootNamespace>
+    <CodeAnalysisRuleSet>..\..\src\StyleCop.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\Connector\Connector.csproj" />
   </ItemGroup>
@@ -8,12 +21,4 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>Mixed</RootNamespace>
-    <AssemblyName>Mixed</AssemblyName>
-    <TargetFrameworks>net35;netcoreapp1.0;netcoreapp2.1</TargetFrameworks>
-    <ReleaseVersion>1.0</ReleaseVersion>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-  </PropertyGroup>
 </Project>
