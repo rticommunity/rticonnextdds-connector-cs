@@ -12,15 +12,27 @@ namespace RTI.Connext.Connector.Interface
     using System;
     using System.Runtime.InteropServices;
 
+    /// <summary>
+    /// Internal instance wrapper.
+    /// </summary>
     sealed class Instance
     {
         readonly Output output;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Instance"/> class.
+        /// </summary>
+        /// <param name="output">The associated output entity.</param>
         public Instance(Output output)
         {
             this.output = output;
         }
 
+        /// <summary>
+        /// Set the specified number value to a field.
+        /// </summary>
+        /// <param name="field">Field name.</param>
+        /// <param name="val">Value for the field.</param>
         public void SetNumber(string field, double val)
         {
             if (output.Connector.Disposed) {
@@ -34,6 +46,11 @@ namespace RTI.Connext.Connector.Interface
                 val);
         }
 
+        /// <summary>
+        /// Set the specified boolean value to a field.
+        /// </summary>
+        /// <param name="field">Field name.</param>
+        /// <param name="val">Value for the field.</param>
         public void SetBool(string field, bool val)
         {
             if (output.Connector.Disposed) {
@@ -47,6 +64,11 @@ namespace RTI.Connext.Connector.Interface
                 val ? 1 : 0);
         }
 
+        /// <summary>
+        /// Set the specified string value to a field.
+        /// </summary>
+        /// <param name="field">Field name.</param>
+        /// <param name="val">Value for the field.</param>
         public void SetString(string field, string val)
         {
             if (output.Connector.Disposed) {
@@ -60,6 +82,10 @@ namespace RTI.Connext.Connector.Interface
                 val);
         }
 
+        /// <summary>
+        /// Set instance fields from a JSON string.
+        /// </summary>
+        /// <param name="json">JSON with the instance fields.</param>
         public void SetJson(string json)
         {
             if (output.Connector.Disposed) {
@@ -72,6 +98,9 @@ namespace RTI.Connext.Connector.Interface
                 json);
         }
 
+        /// <summary>
+        /// Interface with the native library.
+        /// </summary>
         static class NativeMethods
         {
             [DllImport("rtiddsconnector", CharSet = CharSet.Ansi)]

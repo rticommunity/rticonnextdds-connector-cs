@@ -19,6 +19,10 @@ namespace RTI.Connext.Connector
         readonly Output output;
         readonly Interface.Instance instance;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Instance"/> class.
+        /// </summary>
+        /// <param name="output">Output associated to the instance.</param>
         internal Instance(Output output)
         {
             this.output = output;

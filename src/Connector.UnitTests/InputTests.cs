@@ -26,7 +26,7 @@ namespace RTI.Connext.Connector.UnitTests
         [TearDown]
         public void TearDown()
         {
-            connector?.Dispose();
+            connector.Dispose();
         }
 
         [Test]

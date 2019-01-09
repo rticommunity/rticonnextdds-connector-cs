@@ -34,7 +34,7 @@ namespace RTI.Connext.Connector.Interface
         /// Illegal parameter value.
         /// The value of the parameter that is passed in has llegal value.
         /// Things that fall into this category include NULL parameters and
-        /// parameter values that are out of range. 
+        /// parameter values that are out of range.
         /// </summary>
         BadParameter,
 
@@ -42,7 +42,7 @@ namespace RTI.Connext.Connector.Interface
         /// A pre-condition for the operation was not met.
         /// The system is not in the expected state when the function is called,
         /// or the parameter itself is not in the expected state when the
-        /// function is called. 
+        /// function is called.
         /// </summary>
         PreconditionNotMet,
 
@@ -64,7 +64,7 @@ namespace RTI.Connext.Connector.Interface
 
         /// <summary>
         /// Application specified a set of QoS policies that are not consistent
-        /// with each other. 
+        /// with each other.
         /// </summary>
         InconsistencyPolicy,
 
@@ -80,7 +80,7 @@ namespace RTI.Connext.Connector.Interface
 
         /// <summary>
         /// Indicates a transient situation where the operation did not return
-        /// any data but there is no inherent error. 
+        /// any data but there is no inherent error.
         /// </summary>
         NoData,
 
@@ -89,7 +89,7 @@ namespace RTI.Connext.Connector.Interface
         /// An operation was invoked on an inappropriate object or at an
         /// inappropriate time. This return code is similar to
         /// <see cref="PreconditionNotMet"/>, except that there is no
-        /// precondition that could be changed to make the operation succeed. 
+        /// precondition that could be changed to make the operation succeed.
         /// </summary>
         IllegalOperation,
 

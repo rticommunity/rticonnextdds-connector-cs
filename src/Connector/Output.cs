@@ -46,6 +46,10 @@ namespace RTI.Connext.Connector
             private set;
         }
 
+        /// <summary>
+        /// Gets the internal wrapper instance.
+        /// </summary>
+        /// <value>The internal wrapper instance</value>
         internal Interface.Output InternalOutput {
             get { return output; }
         }

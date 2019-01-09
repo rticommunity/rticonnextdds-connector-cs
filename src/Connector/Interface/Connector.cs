@@ -12,8 +12,16 @@ namespace RTI.Connext.Connector.Interface
     using System;
     using System.Runtime.InteropServices;
 
+    /// <summary>
+    /// Internal wrapper for Connector.
+    /// </summary>
     sealed class Connector : IDisposable
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Connector"/> class.
+        /// </summary>
+        /// <param name="configName">XML configuration name.</param>
+        /// <param name="configFile">XML configuration file path.</param>
         public Connector(string configName, string configFile)
         {
             Handle = new ConnectorPtr(configName, configFile);
@@ -22,39 +30,71 @@ namespace RTI.Connext.Connector.Interface
             }
         }
 
+        /// <summary>
+        /// Finalizes an instance of the <see cref="Connector" /> class.
+        /// </summary>
         ~Connector()
         {
             Dispose(false);
         }
 
+        /// <summary>
+        /// Gets the internal Connector pointer handle.
+        /// </summary>
+        /// <value>The internal Connector pointer handle.</value>
         public ConnectorPtr Handle {
             get;
             private set;
         }
 
+        /// <summary>
+        /// Gets a value indicating whether this <see cref="Connector"/> is disposed.
+        /// </summary>
+        /// <value><c>true</c> if disposed; otherwise, <c>false</c>.</value>
         public bool Disposed {
             get;
             private set;
         }
 
+        /// <summary>
+        /// Waits until any <see cref="Input"/> receives at least one sample
+        /// or the specific time pass.
+        /// </summary>
+        /// <param name="timeoutMillis">
+        /// Timeout in milliseconds.
+        /// Use -1 to wait indefinitely for samples.
+        /// </param>
+        /// <returns>
+        /// <c>true</c> if a sample was received;
+        /// otherwise if timeout <c>false</c>.
+        /// </returns>
         public bool Wait(int timeoutMillis)
         {
             ReturnCode retcode = (ReturnCode)NativeMethods.RTIDDSConnector_wait(
                 Handle,
                 timeoutMillis);
             if (retcode != ReturnCode.Ok && retcode != ReturnCode.Timeout) {
-                throw new SEHException("Wait faiulre. Retcode: " + retcode.ToString());
+                throw new SEHException($"Wait failure. Retcode: {retcode}");
             }
 
             return retcode != ReturnCode.Timeout;
         }
 
+        /// <summary>
+        /// Releases all resource used by the <see cref="Connector"/> object.
+        /// </summary>
         public void Dispose()
         {
             Dispose(true);
             GC.SuppressFinalize(this);
         }
 
+        /// <summary>
+        /// Releases all resource used by the <see cref="Connector"/> object.
+        /// </summary>
+        /// <param name="freeManagedResources">
+        /// True to dispose managed resources.
+        /// </param>
         void Dispose(bool freeManagedResources)
         {
             Disposed = true;
@@ -63,8 +103,16 @@ namespace RTI.Connext.Connector.Interface
             }
         }
 
+        /// <summary>
+        /// Connector pointer handle.
+        /// </summary>
         internal sealed class ConnectorPtr : SafeHandle
         {
+            /// <summary>
+            /// Initializes a new instance of the <see cref="ConnectorPtr"/> class.
+            /// </summary>
+            /// <param name="configName">XML configuration name.</param>
+            /// <param name="configFile">XML configuration file path.</param>
             public ConnectorPtr(string configName, string configFile)
                 : base(IntPtr.Zero, true)
             {
@@ -74,8 +122,15 @@ namespace RTI.Connext.Connector.Interface
                     IntPtr.Zero);
             }
 
+            /// <summary>
+            /// Gets a value indicating whether the handle value is invalid.
+            /// </summary>
             public override bool IsInvalid => handle == IntPtr.Zero;
 
+            /// <summary>
+            /// Free the handle.
+            /// </summary>
+            /// <returns>Always true.</returns>
             protected override bool ReleaseHandle()
             {
                 NativeMethods.RTIDDSConnector_delete(handle);
@@ -84,6 +139,9 @@ namespace RTI.Connext.Connector.Interface
             }
         }
 
+        /// <summary>
+        /// Interface with the native library.
+        /// </summary>
         static class NativeMethods
         {
             [DllImport("rtiddsconnector", CharSet = CharSet.Ansi)]

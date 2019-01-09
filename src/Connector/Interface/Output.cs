@@ -12,8 +12,16 @@ namespace RTI.Connext.Connector.Interface
     using System;
     using System.Runtime.InteropServices;
 
+    /// <summary>
+    /// Internal wrapper for outputs.
+    /// </summary>
     sealed class Output
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Output"/> class.
+        /// </summary>
+        /// <param name="connector">The associated connector instance.</param>
+        /// <param name="entityName">The entity name.</param>
         public Output(Connector connector, string entityName)
         {
             Connector = connector;
@@ -29,16 +37,27 @@ namespace RTI.Connext.Connector.Interface
             }
         }
 
+        /// <summary>
+        /// Gets the associated connector instance.
+        /// </summary>
+        /// <value>The connector instance.</value>
         public Connector Connector {
             get;
             private set;
         }
 
+        /// <summary>
+        /// Gets the entity name.
+        /// </summary>
+        /// <value>The entity name.</value>
         public string EntityName {
             get;
             private set;
         }
 
+        /// <summary>
+        /// Clear all the fields from the instance.
+        /// </summary>
         public void Clear()
         {
             if (Connector.Disposed) {
@@ -48,6 +67,9 @@ namespace RTI.Connext.Connector.Interface
             NativeMethods.RTIDDSConnector_clear(Connector.Handle, EntityName);
         }
 
+        /// <summary>
+        /// Writes the instance.
+        /// </summary>
         public void Write()
         {
             if (Connector.Disposed) {
@@ -57,6 +79,9 @@ namespace RTI.Connext.Connector.Interface
             NativeMethods.RTIDDSConnector_write(Connector.Handle, EntityName, null);
         }
 
+        /// <summary>
+        /// Interface with the native library.
+        /// </summary>
         static class NativeMethods
         {
             [DllImport("rtiddsconnector", CharSet = CharSet.Ansi)]

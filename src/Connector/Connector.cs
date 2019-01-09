@@ -39,6 +39,9 @@ namespace RTI.Connext.Connector
             internalConnector = new Interface.Connector(configName, configFile);
         }
 
+        /// <summary>
+        /// Finalizes an instance of the <see cref="Connector" /> class.
+        /// </summary>
         ~Connector()
         {
             Dispose(false);
@@ -71,6 +74,10 @@ namespace RTI.Connext.Connector
             private set;
         }
 
+        /// <summary>
+        /// Gets the internal wrapper instance.
+        /// </summary>
+        /// <value>The internal wrapper instance.</value>
         internal Interface.Connector InternalConnector {
             get { return internalConnector; }
         }
@@ -145,6 +152,12 @@ namespace RTI.Connext.Connector
             GC.SuppressFinalize(this);
         }
 
+        /// <summary>
+        /// Releases all resource used by the <see cref="Connector"/> object.
+        /// </summary>
+        /// <param name="freeManagedResources">
+        /// True to dispose managed resources.
+        /// </param>
         protected virtual void Dispose(bool freeManagedResources)
         {
             if (Disposed) {

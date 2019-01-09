@@ -12,8 +12,16 @@ namespace RTI.Connext.Connector.Interface
     using System;
     using System.Runtime.InteropServices;
 
+    /// <summary>
+    /// Internal wrapper for inputs.
+    /// </summary>
     sealed class Input
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Input"/> class.
+        /// </summary>
+        /// <param name="connector">The internal connector instance.</param>
+        /// <param name="entityName">The input name.</param>
         public Input(Connector connector, string entityName)
         {
             Connector = connector;
@@ -29,16 +37,28 @@ namespace RTI.Connext.Connector.Interface
             }
         }
 
+        /// <summary>
+        /// Gets the Connector associated to the instance.
+        /// </summary>
+        /// <value>The Connector instance.</value>
         public Connector Connector {
             get;
             private set;
         }
 
+        /// <summary>
+        /// Gets the entity name.
+        /// </summary>
+        /// <value>The entity name.</value>
         public string EntityName {
             get;
             private set;
         }
 
+        /// <summary>
+        /// Gets the number of samples received.
+        /// </summary>
+        /// <returns>The number of samples received.</returns>
         public int GetSamplesLength()
         {
             return (int)NativeMethods.RTIDDSConnector_getSamplesLength(
@@ -46,6 +66,10 @@ namespace RTI.Connext.Connector.Interface
                 EntityName);
         }
 
+        /// <summary>
+        /// Reads samples with this input and do not remove them from the
+        /// internal queue.
+        /// </summary>
         public void Read()
         {
             if (Connector.Disposed) {
@@ -55,6 +79,10 @@ namespace RTI.Connext.Connector.Interface
             NativeMethods.RTIDDSConnector_read(Connector.Handle, EntityName);
         }
 
+        /// <summary>
+        /// Reads samples with this input and remove them from the
+        /// internal queue.
+        /// </summary>
         public void Take()
         {
             if (Connector.Disposed) {
@@ -64,13 +92,16 @@ namespace RTI.Connext.Connector.Interface
             NativeMethods.RTIDDSConnector_take(Connector.Handle, EntityName);
         }
 
+        /// <summary>
+        /// Interface with the native library.
+        /// </summary>
         static class NativeMethods
         {
             [DllImport("rtiddsconnector", CharSet = CharSet.Ansi)]
             public static extern IntPtr RTIDDSConnector_getReader(
                 Connector.ConnectorPtr connectorHandle,
                 string entityName);
-            
+
             [DllImport("rtiddsconnector", CharSet = CharSet.Ansi)]
             public static extern void RTIDDSConnector_read(
                 Connector.ConnectorPtr connectorHandle,

@@ -1,4 +1,4 @@
-﻿// (c) 2017 Copyright, Real-Time Innovations, All rights reserved.
+// (c) 2017 Copyright, Real-Time Innovations, All rights reserved.
 //
 // RTI grants Licensee a license to use, modify, compile, and create
 // derivative works of the Software.  Licensee has the right to distribute
@@ -48,6 +48,10 @@ namespace RTI.Connext.Connector
             private set;
         }
 
+        /// <summary>
+        /// Gets the internal wrapper instance.
+        /// </summary>
+        /// <value>The internal wrapper instance.</value>
         internal Interface.Input InternalInput {
             get { return input; }
         }
@@ -57,7 +61,7 @@ namespace RTI.Connext.Connector
         /// internal queue.
         /// </summary>
         /// <remarks>
-        /// The samples are accessible from the <see cref="Samples"/> property. 
+        /// The samples are accessible from the <see cref="Samples"/> property.
         /// </remarks>
         public void Read()
         {
@@ -69,7 +73,7 @@ namespace RTI.Connext.Connector
         /// internal queue.
         /// </summary>
         /// <remarks>
-        /// The samples are accesible from the <see cref="Samples"/> property. 
+        /// The samples are accesible from the <see cref="Samples"/> property.
         /// </remarks>
         public void Take()
         {

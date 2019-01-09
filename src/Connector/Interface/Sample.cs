@@ -12,17 +12,30 @@ namespace RTI.Connext.Connector.Interface
     using System;
     using System.Runtime.InteropServices;
 
+    /// <summary>
+    /// Internal wrapper for samples.
+    /// </summary>
     sealed class Sample
     {
         readonly Input input;
         readonly int index;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Sample"/> class.
+        /// </summary>
+        /// <param name="input">The associated input entity.</param>
+        /// <param name="index">The sample index.</param>
         public Sample(Input input, int index)
         {
             this.input = input;
             this.index = index;
         }
 
+        /// <summary>
+        /// Gets a numeric field from the sample.
+        /// </summary>
+        /// <param name="field">The field name.</param>
+        /// <returns>The field value.</returns>
         public double GetNumberFromSample(string field)
         {
             if (input.Connector.Disposed) {
@@ -36,6 +49,11 @@ namespace RTI.Connext.Connector.Interface
                 field);
         }
 
+        /// <summary>
+        /// Gets a boolean field from the sample.
+        /// </summary>
+        /// <param name="field">The field name.</param>
+        /// <returns>The field value.</returns>
         public bool GetBoolFromSample(string field)
         {
             if (input.Connector.Disposed) {
@@ -49,6 +67,11 @@ namespace RTI.Connext.Connector.Interface
                 field) != 0;
         }
 
+        /// <summary>
+        /// Gets a string field from the sample.
+        /// </summary>
+        /// <param name="field">The field name.</param>
+        /// <returns>The field value.</returns>
         public string GetStringFromSample(string field)
         {
             if (input.Connector.Disposed) {
@@ -63,6 +86,10 @@ namespace RTI.Connext.Connector.Interface
                     field));
         }
 
+        /// <summary>
+        /// Gets the JSON representation of the sample fields.
+        /// </summary>
+        /// <returns>The sample in JSON.</returns>
         public string GetJsonFromSample()
         {
             if (input.Connector.Disposed) {
@@ -76,6 +103,11 @@ namespace RTI.Connext.Connector.Interface
                     index));
         }
 
+        /// <summary>
+        /// Gets a boolean field from the sample information.
+        /// </summary>
+        /// <param name="field">The field name.</param>
+        /// <returns>The field value.</returns>
         public bool GetBoolFromInfo(string field)
         {
             if (input.Connector.Disposed) {
@@ -89,6 +121,11 @@ namespace RTI.Connext.Connector.Interface
                 field) != 0;
         }
 
+        /// <summary>
+        /// Converts an unmanaged string into managed and release resources.
+        /// </summary>
+        /// <param name="strPtr">The unmanaged string pointer.</param>
+        /// <returns>The managed string.</returns>
         string GetStringAndFreeUnmanaged(IntPtr strPtr)
         {
             if (strPtr == IntPtr.Zero) {
@@ -102,6 +139,9 @@ namespace RTI.Connext.Connector.Interface
             return str;
         }
 
+        /// <summary>
+        /// Interface with the native library.
+        /// </summary>
         static class NativeMethods
         {
             [DllImport("rtiddsconnector", CharSet = CharSet.Ansi)]
@@ -110,14 +150,14 @@ namespace RTI.Connext.Connector.Interface
                 string entityName,
                 int index,
                 string name);
-            
+
             [DllImport("rtiddsconnector", CharSet = CharSet.Ansi)]
             public static extern double RTIDDSConnector_getNumberFromSamples(
                 Connector.ConnectorPtr connectorHandle,
                 string entityName,
                 int index,
                 string name);
-            
+
             [DllImport("rtiddsconnector", CharSet = CharSet.Ansi)]
             public static extern int RTIDDSConnector_getBooleanFromSamples(
                 Connector.ConnectorPtr connectorHandle,

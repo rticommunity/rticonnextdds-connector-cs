@@ -19,6 +19,10 @@ namespace RTI.Connext.Connector
     {
         readonly Interface.Sample internalSample;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SampleData"/> class.
+        /// </summary>
+        /// <param name="internalSample">Internal sample.</param>
         internal SampleData(Interface.Sample internalSample)
         {
             this.internalSample = internalSample;
