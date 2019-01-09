@@ -12,6 +12,7 @@ namespace RTI.Connext.Connector.UnitTests
     using System;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Linq;
     using System.Runtime.InteropServices;
     using System.Threading;
@@ -25,7 +26,7 @@ namespace RTI.Connext.Connector.UnitTests
         Connector connector;
         Output output;
         Input input;
-        SampleCollection samples;
+        ReadOnlyCollection<Sample> samples;
 
         [SetUp]
         public void SetUp()
@@ -284,7 +285,7 @@ namespace RTI.Connext.Connector.UnitTests
                 FillKind = MyFullType.ShapeFillKind.Solid,
                 Angle = 3.14f,
                 Hidden = true,
-                List = new int[5] { 2, 3, 4, 5, 6 },
+                List = new int[] { 2, 3, 4, 5, 6 },
                 Inner = new MyFullType.InnerStruct { Z = 23 },
                 Byte = 0x7F,
                 Ushort = 0xEFFE,
@@ -306,7 +307,7 @@ namespace RTI.Connext.Connector.UnitTests
             Assert.AreEqual(MyFullType.ShapeFillKind.Solid, received.FillKind);
             Assert.AreEqual(3.14f, received.Angle);
             Assert.AreEqual(true, received.Hidden);
-            Assert.AreEqual(5, received.List.Length);
+            Assert.AreEqual(MyFullType.ListLength, received.List.Length);
             Assert.AreEqual(2, received.List[0]);
             Assert.AreEqual(3, received.List[1]);
             Assert.AreEqual(4, received.List[2]);
@@ -449,17 +450,6 @@ namespace RTI.Connext.Connector.UnitTests
             Assert.AreEqual("blue", received.Color);
             Assert.AreEqual(3, received.X);
             Assert.AreEqual(0, received.Fake);
-        }
-
-        [Test]
-        public void GetNumberSamplesAfterDisposingConnectorThrowsException()
-        {
-            SendAndTakeOrReadStandardSample(true);
-            connector.Dispose();
-            int count = 0;
-            Assert.Throws<ObjectDisposedException>(() => count = samples.Count);
-            Assert.Throws<ObjectDisposedException>(() => count = samples.Count());
-            Assert.Throws<ObjectDisposedException>(() => samples.Single());
         }
 
         [Test]

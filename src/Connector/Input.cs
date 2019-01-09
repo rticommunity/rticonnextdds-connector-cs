@@ -1,4 +1,4 @@
-// (c) 2017 Copyright, Real-Time Innovations, All rights reserved.
+﻿// (c) 2017 Copyright, Real-Time Innovations, All rights reserved.
 //
 // RTI grants Licensee a license to use, modify, compile, and create
 // derivative works of the Software.  Licensee has the right to distribute
@@ -9,11 +9,15 @@
 // damages arising out of the use or inability to use the software.
 namespace RTI.Connext.Connector
 {
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+
     /// <summary>
     /// Connector input.
     /// </summary>
     public class Input
     {
+        readonly List<Sample> samples;
         readonly Interface.Input input;
 
         /// <summary>
@@ -27,7 +31,9 @@ namespace RTI.Connext.Connector
             input = new Interface.Input(
                 connector.InternalConnector,
                 entityName);
-            Samples = new SampleCollection(this);
+
+            samples = new List<Sample>();
+            Samples = new ReadOnlyCollection<Sample>(samples);
         }
 
         /// <summary>
@@ -43,7 +49,7 @@ namespace RTI.Connext.Connector
         /// Gets the samples read or taken from this input.
         /// </summary>
         /// <value>The samples read or taken.</value>
-        public SampleCollection Samples {
+        public ReadOnlyCollection<Sample> Samples {
             get;
             private set;
         }
@@ -66,6 +72,7 @@ namespace RTI.Connext.Connector
         public void Read()
         {
             input.Read();
+            UpdateSampleList();
         }
 
         /// <summary>
@@ -78,6 +85,20 @@ namespace RTI.Connext.Connector
         public void Take()
         {
             input.Take();
+            UpdateSampleList();
+        }
+
+        /// <summary>
+        /// Clear and update the list of samples.
+        /// </summary>
+        void UpdateSampleList()
+        {
+            samples.Clear();
+
+            int length = InternalInput.GetSamplesLength();
+            for (int i = 0; i < length; i++) {
+                samples.Add(new Sample(this, i + 1));
+            }
         }
     }
 }

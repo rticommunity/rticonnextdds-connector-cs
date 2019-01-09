@@ -10,5 +10,8 @@
 
     <!-- Do not force to prefix local calls with 'this' -->
     <Rule Id="SA1101" Action="None" />
+
+    <!-- Disable mandatory access modifiers. -->
+    <Rule Id="SA1400" Action="None" />
   </Rules>
 </RuleSet>
