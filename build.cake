@@ -32,14 +32,30 @@ var netStandardVersion = "netstandard1.1";
 
 var target = Argument("target", "Default");
 var configuration = Argument("configuration", "Debug");
+var warningAsErrors = Argument("warnaserror", true);
 
 var msbuildConfig = new MSBuildSettings {
     Verbosity = Verbosity.Minimal,
     Configuration = configuration,
     Restore = true,
     MaxCpuCount = 0,  // Auto build parallel mode
-    WarningsAsError = Argument("warnaserror", false)
+    WarningsAsError = warningAsErrors,
 };
+
+
+Task("Clean")
+    .Does(() =>
+{
+    MSBuild("src/Connector.sln", configurator => configurator
+        .WithTarget("Clean")
+        .SetVerbosity(Verbosity.Minimal)
+        .SetConfiguration(configuration));
+    if (DirectoryExists("artifacts")) {
+        DeleteDirectory(
+            "artifacts",
+            new DeleteDirectorySettings { Recursive = true });
+    }
+});
 
 Task("Build-API")
     .Description("Build the API")
@@ -136,7 +152,7 @@ Task("Run-AltCover")
     if (covered == coverable) {
         Information("Full coverage!");
     } else {
-        Error($"Missing coverage: {covered} of {coverable}");
+        ReportWarning($"Missing coverage: {covered} of {coverable}");
     }
 });
 
@@ -154,6 +170,41 @@ Task("Fix-DocFx")
     CopyFileToDirectory(
         "tools/SQLitePCLRaw.core/lib/net45/SQLitePCLRaw.core.dll",
         GetDirectories("tools/docfx.console.*").Single().Combine("tools"));
+});
+
+Task("Pack")
+    .Description("Create the NuGet package")
+    .IsDependentOn("Clean")
+    .IsDependentOn("Build-API")
+    .Does(() =>
+{
+    // We can't use .NET Core to pack because it doesn't support
+    // targets from .NET Framework 3.5:
+    // https://github.com/Microsoft/msbuild/issues/1333
+
+    // We can't use NuGet.exe to pack because it doesn't support
+    // .NET Core targets
+    // https://github.com/NuGet/Home/issues/5832
+
+    MSBuild("src/Connector.sln", configurator => configurator
+        .SetConfiguration(configuration)
+        .SetVerbosity(Verbosity.Minimal)
+        .WithProperty("PackageOutputPath", new[] { "../../artifacts" })
+        .WithProperty("IncludeSymbols", new[] { "true" })
+        .WithTarget("Pack")
+    );
+});
+
+Task("Deploy")
+    .Description("Deploy the NuGet packages to the server")
+    .IsDependentOn("Pack")
+    .Does(() =>
+{
+    var settings = new DotNetCoreNuGetPushSettings {
+        Source = "https://api.nuget.org/v3/index.json",
+        ApiKey = Environment.GetEnvironmentVariable("NUGET_KEY"),
+    };
+    DotNetCoreNuGetPush("artifacts/*.nupkg", settings);
 });
 
 Task("Generate-DocWeb")
@@ -207,7 +258,15 @@ Task("Update-DocRepo")
 
     // Commit and push
     retcode = StartProcess("git", new ProcessSettings {
-        Arguments = "commit -a -m ':books: Update doc from cake'",
+        Arguments = "add --all",
+        WorkingDirectory = repo_doc
+    });
+    if (retcode != 0) {
+        throw new Exception("Cannot add");
+    }
+
+    retcode = StartProcess("git", new ProcessSettings {
+        Arguments = "commit -m \":books: Update doc from cake\"",
         WorkingDirectory = repo_doc
     });
     if (retcode != 0) {
@@ -239,6 +298,15 @@ Task("Travis")
 
 RunTarget(target);
 
+
+public void ReportWarning(string msg)
+{
+    if (warningAsErrors) {
+        throw new Exception(msg);
+    } else {
+        Warning(msg);
+    }
+}
 
 public string GetLoadLibraryEnvVar()
 {
