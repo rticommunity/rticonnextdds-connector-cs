@@ -22,9 +22,10 @@ Scripting language bindings and examples are provided in source format.
 
 ## Compatibility
 
-We use P/Invoke technology to call the native functions. This API works with
-.NET Standard 1.1, .NET Framework 3.5, .NET Core .1.0, .NET Core 2.1 and Mono.
-It's compatible with Windows, Linux, Mac OS X and Android.
+We use P/Invoke technology to call the native functions. The library targets
+.NET Standard 1.1 and.NET Framework 3.5, so it's compatible with most .NET
+implementations like .NET Core, .NET Framework and Mono (including Xamarin).
+It has been tested on Windows, Linux, Mac OS and Android.
 
 ### Native libraries
 
@@ -61,7 +62,11 @@ The .NET API is self-documented. You can generate the documentation with
 [docfx](https://dotnet.github.io/docfx) running:
 
 ```bash
-docfx docs/docfx.json --serve
+# Linux / Mac OS
+./build.sh --target="Generate-DocWeb"
+
+# Windows
+build.ps1 --target="Generate-DocWeb"
 ```
 
 The documentation includes an [overview of the API](xref:api_overview) and
@@ -81,14 +86,14 @@ Then clone the repository and compile the API:
 git clone https://github.com/rticommunity/rticonnextdds-connector-cs --recursive
 
 # Go to the Connector directory
-cd rticonnextdds-connector-cs/src
+cd rticonnextdds-connector-cs
 
-# To build with .NET Core you need this step too
-cd Connector && dotnet restore && cd ..
+# Build and run tests
+# Linux and Mac OS
+./build.sh
 
-# Build by default targets:
-# .NET Framework 3.5, .NET Standard 1.1, .NET Core 1.0 and .NET Core 2.1
-msbuild
+# Windows
+build.ps1
 ```
 
 * From Visual Studio or Monodevelop open *src/Connector-VS.sln*.
