@@ -12,6 +12,14 @@ matrix:
       mono: latest
       dotnet: 2.2.101  # Installed by downloading manually packages.
 
+before_install:
+- |
+  if [[ $TRAVIS_OS_NAME == "linux" ]]; then
+    # Workaround for issue #9361 that happens from time to time.
+    # https://github.com/travis-ci/travis-ci/issues/9361
+    sudo apt-get install -y dpkg
+  fi
+
 before_script:
 # Avoid problems with share memory by increasing the kernel limits
 - |
@@ -21,10 +29,6 @@ before_script:
     sudo sysctl -w kern.sysv.shmmni=128
     sudo sysctl -w kern.sysv.shmseg=1024
     sudo sysctl -w kern.sysv.shmall=262144
-  else
-    # Workaround for issue #9361 that happens from time to time.
-    # https://github.com/travis-ci/travis-ci/issues/9361
-    sudo apt-get install -y dpkg
   fi
 
 script:
