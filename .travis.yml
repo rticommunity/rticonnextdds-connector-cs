@@ -4,20 +4,13 @@ language: csharp
 matrix:
   include:
     - os: linux
-      dist: trusty
+      dist: xenial
       mono: latest
       dotnet: 2.2  # Installed by apt-get, it installs the latest 2.1.X
     - os: osx
       osx_image: xcode10
       mono: latest
       dotnet: 2.2.101  # Installed by downloading manually packages.
-
-addons:
-  apt:
-    packages:
-      # Workaround for issue #9361 that happens from time to time.
-      # https://github.com/travis-ci/travis-ci/issues/9361
-      - dpkg
 
 before_script:
 # Avoid problems with share memory by increasing the kernel limits
