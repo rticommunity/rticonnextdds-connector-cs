@@ -4,7 +4,7 @@
     <OutputType>Library</OutputType>
     <AssemblyName>RTI.Connext.Connector</AssemblyName>
     <Product>RTI Connector for Connext DDS</Product>
-    <Version>0.3.3-beta02</Version>
+    <Version>0.3.3-alpha01</Version>
     <Description>.NET API for RTI Connector</Description>
 
     <Company>RTI</Company>

@@ -80,8 +80,6 @@ Make sure you have installed [Mono](http://www.mono-project.com/download/),
 [.NET Core](https://www.microsoft.com/net/core) or .NET Framework.
 Then clone the repository and compile the API:
 
-* From terminal:
-
 ```bash
 git clone https://github.com/rticommunity/rticonnextdds-connector-cs --recursive
 
@@ -95,8 +93,6 @@ cd rticonnextdds-connector-cs
 # Windows
 build.ps1
 ```
-
-* From Visual Studio or Monodevelop open *src/Connector-VS.sln*.
 
 ## Support
 

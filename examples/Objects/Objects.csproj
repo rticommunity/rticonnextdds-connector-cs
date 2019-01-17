@@ -3,8 +3,8 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <AssemblyName>Objects</AssemblyName>
-    <Product>RTI Connector for Connext DDS</Product>
-    <Version>0.3.3-beta02</Version>
+    <Product>RTI Connector Examples</Product>
+    <Version>1.0.0</Version>
     <Description>Objects example for .NET API of RTI Connector</Description>
     <Company>RTI</Company>
     <Copyright>(c) Copyright, Real-Time Innovations, 2017</Copyright>
