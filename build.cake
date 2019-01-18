@@ -204,7 +204,7 @@ Task("Deploy")
         Source = "https://api.nuget.org/v3/index.json",
         ApiKey = Environment.GetEnvironmentVariable("NUGET_KEY"),
     };
-    DotNetCoreNuGetPush("artifacts/*.nupkg", settings);
+    DotNetCoreNuGetPush("artifacts/RTI.Connext.Connector.nupkg", settings);
 });
 
 Task("Generate-DocWeb")

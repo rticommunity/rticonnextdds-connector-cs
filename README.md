@@ -2,6 +2,7 @@
 
 [![Build Status](https://www.travis-ci.org/rticommunity/rticonnextdds-connector-cs.svg?branch=master)](https://www.travis-ci.org/rticommunity/rticonnextdds-connector-cs)
 [![codecov](https://codecov.io/gh/rticommunity/rticonnextdds-connector-cs/branch/master/graph/badge.svg)](https://codecov.io/gh/rticommunity/rticonnextdds-connector-cs)
+[![Nuget](https://img.shields.io/nuget/v/RTI.Connext.Connector.svg)](https://www.nuget.org/packages/RTI.Connext.Connector)
 
 *RTI Connector* for Connext DDS is a quick and easy way to access the power and
 functionality of [RTI Connext DDS](http://www.rti.com/products/index.html).

@@ -8,6 +8,7 @@
     <Description>.NET API for RTI Connector</Description>
 
     <Company>RTI</Company>
+    <Authors>pleonex</Authors>
     <Copyright>(c) Copyright, Real-Time Innovations, 2017</Copyright>
     <PackageProjectUrl>https://rticommunity.github.io/rticonnextdds-connector-cs/</PackageProjectUrl>
     <RepositoryUrl>https://github.com/rticommunity/rticonnextdds-connector-cs</RepositoryUrl>
