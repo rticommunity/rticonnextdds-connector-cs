@@ -9,7 +9,7 @@
       "output": {
         ".html": {
           "relative_path": "README.html",
-          "hash": "/M6nkVAksHdZU3Uh4hgaqw=="
+          "hash": "kBNC2bPW72pZxH9I+Fk1mg=="
         }
       },
       "is_incremental": false,
@@ -21,7 +21,7 @@
       "output": {
         ".html": {
           "relative_path": "api/RTI.Connext.Connector.Connector.html",
-          "hash": "OjfFWgYmx1g9zgvbsB5hIg=="
+          "hash": "4uENNLH8GdoT4cKVl3yD6g=="
         }
       },
       "is_incremental": false,
@@ -33,10 +33,10 @@
       "output": {
         ".html": {
           "relative_path": "api/RTI.Connext.Connector.Input.html",
-          "hash": "dxcTgl3INrDxr2kUBoUVdw=="
+          "hash": "jxdvjDvwkEzzm/gNkoB6tg=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -45,10 +45,10 @@
       "output": {
         ".html": {
           "relative_path": "api/RTI.Connext.Connector.Instance.html",
-          "hash": "lLFn1Zuk1CWnfmHGOmWMIw=="
+          "hash": "iHHcMVxDIQTJrlqPoztOVQ=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -57,10 +57,10 @@
       "output": {
         ".html": {
           "relative_path": "api/RTI.Connext.Connector.Output.html",
-          "hash": "o2OhFunPLSanABU0Ba5Wfw=="
+          "hash": "1xzYPGOmU4q4dkrMZeumhg=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -69,22 +69,10 @@
       "output": {
         ".html": {
           "relative_path": "api/RTI.Connext.Connector.Sample.html",
-          "hash": "ExgoNrQXVccziDy6w/3xMQ=="
+          "hash": "Q+GWObbifqHoUDMq+dgvbQ=="
         }
       },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/RTI.Connext.Connector.SampleCollection.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/RTI.Connext.Connector.SampleCollection.html",
-          "hash": "8e/DEPP8x2tNVub58ZeJZg=="
-        }
-      },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -93,10 +81,10 @@
       "output": {
         ".html": {
           "relative_path": "api/RTI.Connext.Connector.SampleData.html",
-          "hash": "d2lLD6JeseKtehv5GRPLbQ=="
+          "hash": "lnxO0C3ayfhgTgm2V0xZ2Q=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -105,10 +93,10 @@
       "output": {
         ".html": {
           "relative_path": "api/RTI.Connext.Connector.SampleInfo.html",
-          "hash": "poNQ/B9Nu9ZbBsuNSU0ejA=="
+          "hash": "T6ZQqLMujj+7VqOpbV8EFw=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -117,7 +105,7 @@
       "output": {
         ".html": {
           "relative_path": "api/RTI.Connext.Connector.html",
-          "hash": "QZo6H7sCxSn1ShAuBfx9Eg=="
+          "hash": "6onu4rW+0J41fEHTheSURA=="
         }
       },
       "is_incremental": false,
@@ -140,10 +128,10 @@
       "output": {
         ".html": {
           "relative_path": "articles/api_overview.html",
-          "hash": "cMTOmaN1b+3YW8sSy5JxMw=="
+          "hash": "2Bft+ryeY353uzzmiJBPLQ=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -152,7 +140,7 @@
       "output": {
         ".html": {
           "relative_path": "fusion/toc.html",
-          "hash": "uZ5jlKlCOc+6MqpEdMcgMQ=="
+          "hash": "lm9ma/RyTAoeyXbxeKR5Kg=="
         }
       },
       "is_incremental": false,
@@ -186,7 +174,7 @@
       "output": {
         ".html": {
           "relative_path": "index.html",
-          "hash": "HaYoSls6ZRYlX0+Xt8EOrQ=="
+          "hash": "DWCt1wPe/dJVYmLPJRfM8w=="
         }
       },
       "is_incremental": false,
@@ -208,8 +196,7 @@
   "incremental_info": [
     {
       "status": {
-        "can_incremental": false,
-        "details": "Cannot build incrementally because config changed.",
+        "can_incremental": true,
         "incrementalPhase": "build"
       },
       "processors": {
@@ -224,11 +211,11 @@
           "incrementalPhase": "build"
         },
         "ConceptualDocumentProcessor": {
-          "can_incremental": false,
+          "can_incremental": true,
           "incrementalPhase": "build"
         },
         "ManagedReferenceDocumentProcessor": {
-          "can_incremental": false,
+          "can_incremental": true,
           "incrementalPhase": "build"
         }
       }

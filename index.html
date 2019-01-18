@@ -8,7 +8,7 @@
     <title>RTI Connector C# / .NET for Connext DDS | RTI Connector C# </title>
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="RTI Connector C# / .NET for Connext DDS | RTI Connector C# ">
-    <meta name="generator" content="docfx 2.39.2.0">
+    <meta name="generator" content="docfx 2.40.7.0">
     
     <link rel="shortcut icon" href="images/favicon.ico">
     <link rel="stylesheet" href="styles/docfx.vendor.css">
@@ -62,6 +62,9 @@
             <article class="content wrap" id="_content" data-uid="README">
 <h1 id="rti-connector-c--net-for-connext-dds">RTI Connector C# / .NET for Connext DDS</h1>
 
+<p><a href="https://www.travis-ci.org/rticommunity/rticonnextdds-connector-cs"><img src="https://www.travis-ci.org/rticommunity/rticonnextdds-connector-cs.svg?branch=master" alt="Build Status"></a>
+<a href="https://codecov.io/gh/rticommunity/rticonnextdds-connector-cs"><img src="https://codecov.io/gh/rticommunity/rticonnextdds-connector-cs/branch/master/graph/badge.svg" alt="codecov"></a>
+<a href="https://www.nuget.org/packages/RTI.Connext.Connector"><img src="https://img.shields.io/nuget/v/RTI.Connext.Connector.svg" alt="Nuget"></a></p>
 <p><em>RTI Connector</em> for Connext DDS is a quick and easy way to access the power and
 functionality of <a href="http://www.rti.com/products/index.html">RTI Connext DDS</a>.
 It is based on <a href="https://community.rti.com/static/documentation/connext-dds/5.3.1/doc/manuals/connext_dds/xml_application_creation/RTI_ConnextDDS_CoreLibraries_XML_AppCreation_GettingStarted.pdf">XML App Creation</a>
@@ -76,9 +79,10 @@ with tons of other available technologies.</p>
 <p>The <em>Connector</em> library is provided in binary form for selected architectures.
 Scripting language bindings and examples are provided in source format.</p>
 <h2 id="compatibility">Compatibility</h2>
-<p>We use P/Invoke technology to call the native functions. This API works with
-.NET Standard 1.1, .NET Framework 3.5, .NET Core .1.0, .NET Core 2.1 and Mono.
-It's compatible with Windows, Linux, Mac OS X and Android.</p>
+<p>We use P/Invoke technology to call the native functions. The library targets
+.NET Standard 1.1 and.NET Framework 3.5, so it's compatible with most .NET
+implementations like .NET Core, .NET Framework and Mono (including Xamarin,
+and Unity). It has been tested on Windows, Linux, Mac OS and Android.</p>
 <h3 id="native-libraries">Native libraries</h3>
 <p>The <em>Connector</em> C# API use native libraries from the main
 <a href="https://github.com/rticommunity/rticonnextdds-connector">Connector</a> repository.
@@ -100,7 +104,11 @@ for thread safety.</p>
 <a href="https://rticommunity.github.io/rticonnextdds-connector-cs">here</a>.</p>
 <p>The .NET API is self-documented. You can generate the documentation with
 <a href="https://dotnet.github.io/docfx">docfx</a> running:</p>
-<pre><code class="lang-bash">docfx docs/docfx.json --serve
+<pre><code class="lang-bash"># Linux / Mac OS
+./build.sh --target=&quot;Generate-DocWeb&quot;
+
+# Windows
+build.ps1 --target=&quot;Generate-DocWeb&quot;
 </code></pre>
 <p>The documentation includes an <a class="xref" href="articles/api_overview.html">overview of the API</a> and
 the description of each class.</p>
@@ -109,24 +117,18 @@ the description of each class.</p>
 <p>Make sure you have installed <a href="http://www.mono-project.com/download/">Mono</a>,
 <a href="https://www.microsoft.com/net/core">.NET Core</a> or .NET Framework.
 Then clone the repository and compile the API:</p>
-<ul>
-<li>From terminal:</li>
-</ul>
 <pre><code class="lang-bash">git clone https://github.com/rticommunity/rticonnextdds-connector-cs --recursive
 
 # Go to the Connector directory
-cd rticonnextdds-connector-cs/src
+cd rticonnextdds-connector-cs
 
-# To build with .NET Core you need this step too
-cd Connector &amp;&amp; dotnet restore &amp;&amp; cd ..
+# Build and run tests
+# Linux and Mac OS
+./build.sh
 
-# Build by default targets:
-# .NET Framework 3.5, .NET Standard 1.1, .NET Core 1.0 and .NET Core 2.1
-msbuild
+# Windows
+build.ps1
 </code></pre>
-<ul>
-<li>From Visual Studio or Monodevelop open <em>src/Connector-VS.sln</em>.</li>
-</ul>
 <h2 id="support">Support</h2>
 <p>This is an experimental RTI product. As such we do offer support through the
 <a href="https://community.rti.com/forums/technical-questions">RTI Community Forum</a>.
