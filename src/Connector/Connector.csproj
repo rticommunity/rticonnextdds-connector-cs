@@ -4,7 +4,7 @@
     <OutputType>Library</OutputType>
     <AssemblyName>RTI.Connext.Connector</AssemblyName>
     <Product>RTI Connector for Connext DDS</Product>
-    <Version>0.3.3-alpha01</Version>
+    <Version>0.3.3-alpha02</Version>
     <Description>.NET API for RTI Connector</Description>
 
     <Company>RTI</Company>
@@ -31,5 +31,10 @@
   <ItemGroup>
     <None Include="..\..\LICENSE.txt" Pack="true" PackagePath=""/>
     <None Include="..\..\LICENSE.pdf" Pack="true" PackagePath=""/>
+    <None Include="..\..\rticonnextdds-connector\lib\x64Darwin16clang8.0\librtiddsconnector.dylib" Pack="true" PackagePath="runtimes\osx-x64\native" />
+    <None Include="..\..\rticonnextdds-connector\lib\i86Linux3.xgcc4.6.3\librtiddsconnector.so" Pack="true" PackagePath="runtimes\linux-x86\native" />
+    <None Include="..\..\rticonnextdds-connector\lib\x64Linux2.6gcc4.4.5\librtiddsconnector.so" Pack="true" PackagePath="runtimes\linux-x64\native" />
+    <None Include="..\..\rticonnextdds-connector\lib\i86Win32VS2010\rtiddsconnector.dll" Pack="true" PackagePath="runtimes\win-x86\native" />
+    <None Include="..\..\rticonnextdds-connector\lib\x64Win64VS2013\rtiddsconnector.dll" Pack="true" PackagePath="runtimes\win-x64\native" />
   </ItemGroup>
 </Project>
