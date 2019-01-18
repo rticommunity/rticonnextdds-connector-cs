@@ -24,8 +24,8 @@ Scripting language bindings and examples are provided in source format.
 
 We use P/Invoke technology to call the native functions. The library targets
 .NET Standard 1.1 and.NET Framework 3.5, so it's compatible with most .NET
-implementations like .NET Core, .NET Framework and Mono (including Xamarin).
-It has been tested on Windows, Linux, Mac OS and Android.
+implementations like .NET Core, .NET Framework and Mono (including Xamarin,
+and Unity). It has been tested on Windows, Linux, Mac OS and Android.
 
 ### Native libraries
 

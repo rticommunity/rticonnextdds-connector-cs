@@ -26,7 +26,7 @@ namespace RTI.Connext.Connector.UnitTests
         Connector connector;
         Output output;
         Input input;
-        ReadOnlyCollection<Sample> samples;
+        IList<Sample> samples;
 
         [SetUp]
         public void SetUp()
