@@ -200,11 +200,17 @@ Task("Deploy")
     .IsDependentOn("Pack")
     .Does(() =>
 {
+    // We don't need to manually publish the symbol packages.
+    var packages = GetFiles("artifacts/*.nupkg")
+        .Where(f => !f.GetFilename().ToString().Contains(".symbols."))
+        .Single()
+        .ToString();
+
     var settings = new DotNetCoreNuGetPushSettings {
         Source = "https://api.nuget.org/v3/index.json",
         ApiKey = Environment.GetEnvironmentVariable("NUGET_KEY"),
     };
-    DotNetCoreNuGetPush("artifacts/RTI.Connext.Connector.nupkg", settings);
+    DotNetCoreNuGetPush(packages, settings);
 });
 
 Task("Generate-DocWeb")
