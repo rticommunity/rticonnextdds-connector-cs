@@ -6,17 +6,14 @@
 
 *RTI Connector* for Connext DDS is a quick and easy way to access the power and
 functionality of [RTI Connext DDS](http://www.rti.com/products/index.html).
-It is based on [XML App Creation](https://community.rti.com/static/documentation/connext-dds/5.3.1/doc/manuals/connext_dds/xml_application_creation/RTI_ConnextDDS_CoreLibraries_XML_AppCreation_GettingStarted.pdf)
+It is based on [XML-Based Application Creation](https://community.rti.com/static/documentation/connext-dds/6.0.0/doc/manuals/connext_dds/xml_application_creation/RTI_ConnextDDS_CoreLibraries_XML_AppCreation_GettingStarted.pdf)
 and Dynamic Data.
 
-*Connector* was created by the RTI Research Group to quickly and easily develop
+*Connector* was created to quickly and easily develop
 demos and proof of concept. We think that it can be useful for anybody who needs
-a quick way to script tests and interact with DDS using different scripting
-languages.
+a quick way to script tests and interact with Connext DDS using different scripting languages.
 
-It can be used to quickly create tests for your distributed system and, thanks
-to the binding with scripting languages and the use of XML, to easily integrate
-with tons of other available technologies.
+*Connector* can be used to quickly create tests for your distributed system and, thanks to the binding with scripting languages and the use of XML, to easily integrate with many other available technologies.
 
 The *Connector* library is provided in binary form for selected architectures.
 Scripting language bindings and examples are provided in source format.
@@ -25,7 +22,7 @@ Scripting language bindings and examples are provided in source format.
 
 We use P/Invoke technology to call the native functions. The library targets
 .NET Standard 1.1 and.NET Framework 3.5, so it's compatible with most .NET
-implementations like .NET Core, .NET Framework and Mono (including Xamarin,
+implementations like .NET Core, .NET Framework, and Mono (including Xamarin
 and Unity). It has been tested on Windows, Linux, Mac OS and Android.
 
 ### Native libraries
