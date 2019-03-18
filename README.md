@@ -10,7 +10,7 @@ It is based on [XML-Based Application Creation](https://community.rti.com/static
 and Dynamic Data.
 
 *Connector* was created to quickly and easily develop
-demos and proof of concept. We think that it can be useful for anybody who needs
+demos and proofs of concept. It can be useful for anybody who needs
 a quick way to script tests and interact with Connext DDS using different scripting languages.
 
 *Connector* can be used to quickly create tests for your distributed system and, thanks to the binding with scripting languages and the use of XML, to easily integrate with many other available technologies.
@@ -21,9 +21,9 @@ Scripting language bindings and examples are provided in source format.
 ## Compatibility
 
 We use P/Invoke technology to call the native functions. The library targets
-.NET Standard 1.1 and.NET Framework 3.5, so it's compatible with most .NET
+.NET Standard 1.1 and .NET Framework 3.5, so it's compatible with most .NET
 implementations like .NET Core, .NET Framework, and Mono (including Xamarin
-and Unity). It has been tested on Windows, Linux, Mac OS and Android.
+and Unity). It has been tested on Windows, Linux, Mac OS, and Android.
 
 ### Native libraries
 
@@ -36,7 +36,7 @@ Make sure to clone this repository with the `--recursive` argument or run:
 git submodule update --init --recurse
 ```
 
-The native libraries have been built for few architectures only.
+The native libraries have been built for for [select architectures](https://github.com/rticommunity/rticonnextdds-connector/tree/master/lib).
 If you need another architecture, please contact your RTI account manager or
 sales@rti.com.
 
@@ -94,7 +94,7 @@ build.ps1
 
 ## Support
 
-This is an experimental RTI product. As such we do offer support through the
+*Connector* is an experimental RTI product. If you have any questions, use the
 [RTI Community Forum](https://community.rti.com/forums/technical-questions).
 We also welcome issues and pull request in this GitHub repository.
 We'd love your feedback.
