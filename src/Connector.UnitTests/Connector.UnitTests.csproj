@@ -24,7 +24,7 @@
       <PackageReference Include="NUnit" Version="3.9.0" />
       <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.5.0" />
       <PackageReference Include="Mono.Cecil" Version="0.10.0-beta6" />
-      <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
+      <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Connector\Connector.csproj" />
